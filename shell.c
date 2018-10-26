@@ -1,0 +1,23 @@
+#include<stdlib.h>
+//Reference : https://support.sas.com/documentation/onlinedoc/sasc/doc/lr2/execlp.htm
+
+#include<stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
+
+int main(int argc,char* argv[]){
+	pid_t pid;
+	pid = fork();
+	if ( pid == -1)
+		perror("fork error");
+	else if (pid == 0) {
+		execlp("/usr/bin/gnome-terminal", "--disable-factory", "-e", "./myshell", NULL);
+		// printf("Return not expected. Must be an execlp error.n");
+	}
+	else {
+		;
+	}
+}
