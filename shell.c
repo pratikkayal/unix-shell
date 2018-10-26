@@ -3,9 +3,6 @@
 
 #include<stdio.h>
 #include <unistd.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 
 
 int main(int argc,char* argv[]){
@@ -15,7 +12,6 @@ int main(int argc,char* argv[]){
 		perror("fork error");
 	else if (pid == 0) {
 		execlp("/usr/bin/gnome-terminal", "--disable-factory", "-e", "./myshell", NULL);
-		// printf("Return not expected. Must be an execlp error.n");
 	}
 	else {
 		;
