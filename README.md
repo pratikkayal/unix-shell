@@ -6,7 +6,8 @@
 2. Commands Implemented
 
    about  
-   mkdir  
+   mkdir 
+   cat
 
 ---
 # To run:
