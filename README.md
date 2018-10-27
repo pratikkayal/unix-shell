@@ -7,7 +7,7 @@
 
    about  
    mkdir 
-   cat
+   cat  
 
 ---
 # To run:
