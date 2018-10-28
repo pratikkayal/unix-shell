@@ -78,7 +78,6 @@ void clear()
 
 void wc_func(char* file_name)
 {   
-   char arr[100][1000];
    char line[1000];
 
    FILE *fp;
@@ -88,7 +87,7 @@ void wc_func(char* file_name)
    if (fp == NULL)
    {
       perror("Error while opening the file.\n");
-      exit(EXIT_FAILURE);
+      // exit(EXIT_FAILURE);
    }
   
    int i = 0;
@@ -102,14 +101,11 @@ void wc_func(char* file_name)
 
     while(j < strlen(line)){
       if (strncmp (&line[j]," ",1) == 0){ word_count++; }
+
         char_count++;
       j++;
     }
     i++;
-    if (i==100){
-      perror("File is large.\n");
-      exit(EXIT_FAILURE);
-    } 
  }
    fclose(fp);
    printf("%d   %d   %d   %s\n",i-1,word_count,char_count,file_name);
