@@ -125,6 +125,22 @@ void wc_func(char* file_name)
    printf("%d   %d   %d   %s\n",i-1,word_count,char_count,file_name);
 }
 
+
+void touch_func(int argc, char* argv[])
+{   
+   FILE* fp;
+   int i = 1;
+
+   while(i<argc){
+
+    fp = fopen(argv[i],"w+");
+    fclose(fp);
+    i++;
+
+   }
+
+}
+
 void cp_command(char* source, char* target)
 {
     FILE *file1, *file2;
@@ -183,6 +199,145 @@ void rm_command(char* path)
         printf("Error: unable to delete");
     }
    
+}
+
+void uniq_func(char* file_name)
+{   
+   char ch;
+   char arr[100][1000];
+   char line[100];
+
+   FILE *fp;
+ 
+   fp = fopen(file_name, "r"); 
+ 
+   if (fp == NULL)
+   {
+      perror("Error while opening the file.\n");
+      exit(EXIT_FAILURE);
+   }
+  
+   int i = 0;
+   while(fscanf(fp,"%[^\n]\n",line)!=EOF)
+   {
+    int j=0;
+    while(j<1000){
+        arr[i][j]=line[j];
+        j++;
+    }
+
+    i++;
+    if (i==100){
+      perror("File is large.\n");
+      exit(EXIT_FAILURE);
+    } 
+ }
+
+  char* arr1[i];
+  char* arr2[i];
+
+  int u = 0;
+
+   while(u < i){
+        arr1[u] = arr[u];
+        u++;
+    }
+
+int y, r, p;
+int flg = 0;
+
+  while(y<i){
+    flg = 0;
+    r = 0;
+    while(r<p){
+      if (*arr1[y] == *arr2[r]){
+        flg = 1;
+      }
+      r++;
+    }
+    if (flg!=1){
+      arr2[p] = arr1[y];
+      p++;
+    }
+    y++;
+  }
+   char* c;
+   int k = 0;
+
+   fclose(fp);
+
+   k = 0;
+   fp = fopen(file_name,"w+");
+
+   while(k<p){
+    fprintf(fp,"%s\n", arr2[k]);
+    k++;
+   }
+   fclose(fp);
+
+}
+
+static int myCompare (const void * a, const void * b) 
+{ 
+    return strcmp (*(const char **) a, *(const char **) b); 
+} 
+
+
+void sort_func(char* file_name)
+{   
+   char ch;
+   char arr[100][1000];
+   char line[100];
+
+   FILE *fp;
+ 
+   fp = fopen(file_name, "r"); 
+ 
+   if (fp == NULL)
+   {
+      perror("Error while opening the file.\n");
+      exit(EXIT_FAILURE);
+   }
+  
+   int i = 0;
+   while(fscanf(fp,"%[^\n]\n",line)!=EOF)
+   {
+    
+    int j=0;
+    while(j<1000){
+        arr[i][j]=line[j];
+        j++;
+    }
+    i++;
+    if (i==100){
+      perror("File is large.\n");
+      exit(EXIT_FAILURE);
+    } 
+ }
+
+  char* arr1[i];
+  int u = 0;
+
+   while(u < i){
+        arr1[u] = arr[u];
+        u++;
+    }
+
+   qsort (arr1, i, sizeof (char *), myCompare); 
+
+   char* c;
+   int k = 0;
+
+   fclose(fp);
+
+   k = 0;
+   fp = fopen(file_name,"w+");
+   while(k<i){
+    fprintf(fp,"%s\n", arr1[k]);
+    k++;
+   }
+   fclose(fp);
+
 }
 
 
@@ -247,6 +402,22 @@ int main(int argc, char* argv[])
             char* file;
             file = argval[1];
             rm_command(source, terminal);
+        }
+        else if(strcmp(argval[0],"touch")==0)
+        {
+            touch_func(argcount, argval);
+        }
+        else if(strcmp(argval[0],"uniq")==0)
+        {
+            char* file;
+            file = argval[1];
+            uniq_func(file);
+        }
+        else if(strcmp(argval[0],"sort")==0)
+        {
+            char* file;
+            file = argval[1];
+            sort_func(file);
         }
 
     }
