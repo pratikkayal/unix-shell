@@ -4,5 +4,12 @@
 ---
 1. Custom UI
 2. Commands Implemented
-1 about
-2 mkdir
+
+   about  
+   mkdir  
+   cat  
+
+---
+# To run:
+1. Compile both .c files
+2. run ./shell
