@@ -76,7 +76,6 @@ void clear()
     write(STDOUT_FILENO,blank,12);
 }
 
-<<<<<<< HEAD
 void wc_func(char* file_name)
 {   
    char arr[100][1000];
@@ -114,7 +113,8 @@ void wc_func(char* file_name)
  }
    fclose(fp);
    printf("%d   %d   %d   %s\n",i-1,word_count,char_count,file_name);
-=======
+}
+
 void cp_command(char* source, char* target)
 {
     FILE *file1, *file2;
@@ -173,7 +173,6 @@ void rm_command(char* path)
         printf("Error: unable to delete");
     }
    
->>>>>>> 666bf84f4928b087b24cb3263bf8bee36644202f
 }
 
 
@@ -211,13 +210,12 @@ int main(int argc, char* argv[])
         {
             clear();
         }
-<<<<<<< HEAD
         else if(strcmp(argval[0],"wc")==0)
         {
             char* foldername = argval[1];
             wc_func(foldername);
         }
-=======
+
         else if(strcmp(argval[0],"cp")==0)
         {
             char* source, terminal;
@@ -241,6 +239,5 @@ int main(int argc, char* argv[])
             rm_command(source, terminal);
         }
 
->>>>>>> 666bf84f4928b087b24cb3263bf8bee36644202f
     }
 }
