@@ -339,6 +339,97 @@ void sort_func(char* file_name)
 
 }
 
+void cat_func(char* filename)
+{ 
+
+  FILE * file;
+  char c;
+  file = fopen( filename , "r");
+  if (file) 
+  {
+      while((c=fgetc(file))!=EOF)
+      {
+          printf("%c",c);
+      }
+    
+      fclose(file);
+  }
+  else
+  {
+    printf("file doesn't exist\n");
+  }
+}
+
+void ls_func(char* dirname)
+{ 
+    int i=0;
+    struct dirent **dir;
+    int numfiles = scandir(dirname, &dir, 0, alphasort);
+    int j=0;
+    if (numfiles >= 0)
+    {
+        
+        for(i = 0; i < numfiles; i++ )
+        {
+            if((strcmp(dir[i]->d_name,".")!=0 && strcmp(dir[i]->d_name,"..")!=0) && dir[i]->d_name[0]!='.')            
+            {
+
+                struct dirent* name=dir[i];
+                //char names[20]=dir[i]->d_name;
+                if(name->d_type == DT_REG)          // regular file
+                {
+                    printf("%s\t\t", name->d_name);
+                }
+                else if(name->d_type == DT_CHR)    // a character device 
+                {
+                    printf("%s%s\t\t",CYAN, name->d_name);
+                }
+                else if(name->d_type == DT_FIFO)    // a named pipe 
+                {
+                    printf("%s%s\t\t",BOLDGREEN, name->d_name);
+                }
+                else if(name->d_type == DT_DIR)    // a directory
+                {
+                    printf("%s%s\t\t",BOLDBLUE, name->d_name);
+                }
+                else                              // unknown file types
+                {
+                    printf("%s%s\t\t",BOLDCYAN, name->d_name);
+                }
+                j++;
+            }
+            
+            if(j!=0 && j%1==0) printf("\n");
+            //printf("\n");
+        }
+        //printf("\n");
+    }
+    else
+    {
+        
+    }
+
+}
+
+void pwd_func(char* pwdpath,int printornot) // if printornot=1 --> print 
+{
+    char temp[1000];
+    char* path=getcwd(temp, sizeof(temp));
+    if(path != NULL)
+    {
+        strcpy(pwdpath,temp);
+        if(printornot==1)  
+        {
+            printf("%s\n",pwdpath);
+        }
+    }
+    else 
+    {
+
+    }
+
+}
+
 
 int main(int argc, char* argv[])
 {
@@ -418,6 +509,26 @@ int main(int argc, char* argv[])
             file = argval[1];
             sort_func(file);
         }
+         else if(strcmp(argval[0],"cat")==0)
+        {
+            char* file;
+            file = argval[1];
+            cat_func(file);
+        }
+        else if(strcmp(argval[0],"ls")==0)
+        {
+            char* dirname;
+            dirname = argval[1];
+            cat_func(dirname);
+        }
+        else if(strcmp(argval[0],"pwd")==0)
+        {
+            char* pwdpath=argv[1];
+            pwd_func(pwdpath,1);
+        }
+        
+
+
 
     }
 }
