@@ -214,7 +214,6 @@ void uniq_func(char* file_name)
    if (fp == NULL)
    {
       perror("Error while opening the file.\n");
-      exit(EXIT_FAILURE);
    }
   
    int i = 0;
@@ -229,7 +228,6 @@ void uniq_func(char* file_name)
     i++;
     if (i==100){
       perror("File is large.\n");
-      exit(EXIT_FAILURE);
     } 
  }
 
@@ -296,7 +294,6 @@ void sort_func(char* file_name)
    if (fp == NULL)
    {
       perror("Error while opening the file.\n");
-      exit(EXIT_FAILURE);
    }
   
    int i = 0;
@@ -311,7 +308,6 @@ void sort_func(char* file_name)
     i++;
     if (i==100){
       perror("File is large.\n");
-      exit(EXIT_FAILURE);
     } 
  }
 
