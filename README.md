@@ -8,6 +8,12 @@
    about  
    mkdir  
    cat  
+   ls
+   sort
+   uniq
+   touch
+   wc
+   pwd
 
 ---
 # To run:
