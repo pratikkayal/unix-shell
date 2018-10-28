@@ -76,6 +76,19 @@ void clear()
     write(STDOUT_FILENO,blank,12);
 }
 
+int isEmpty_check(const char *str)
+{
+    char ch;
+    do
+    {
+        ch = *(str++);
+        // Check non whitespace character
+        if(ch != ' ' && ch != '\t' && ch != '\n' && ch != '\r' && ch != '\0')
+            return 0;
+    } while (ch != '\0');
+    return 1;
+}
+
 void wc_func(char* file_name)
 {   
    char line[1000];
@@ -87,7 +100,6 @@ void wc_func(char* file_name)
    if (fp == NULL)
    {
       perror("Error while opening the file.\n");
-      // exit(EXIT_FAILURE);
    }
   
    int i = 0;
@@ -95,18 +107,20 @@ void wc_func(char* file_name)
    int word_count = 0;
 
    while((fgets(line, 1000, fp)) != NULL)
-   {
+   { 
     int j=0;
     if (strncmp (&line[0]," ",1) != 0){ word_count++; }
 
     while(j < strlen(line)){
+      if (!isEmpty_check(line)){
       if (strncmp (&line[j]," ",1) == 0){ word_count++; }
-
+    }
         char_count++;
       j++;
     }
     i++;
  }
+
    fclose(fp);
    printf("%d   %d   %d   %s\n",i-1,word_count,char_count,file_name);
 }
