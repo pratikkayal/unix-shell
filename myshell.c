@@ -77,18 +77,18 @@ void clear()
 
 int main(int argc, char* argv[])
 {
-	printf("Welcome to the new unix shell!!\n");
+    printf("Welcome to the new unix shell!!\n");
     while(exitflag==0)
     {
         char temp[1000];
         char* path=getcwd(temp, sizeof(temp));
         printf("%s>>", temp);
-    	// printf(">>");
+        // printf(">>");
         // scanf("%s",input); //fails due to spaces, tabs
-		getInput();
+        getInput();
 
         if(strcmp(argval[0],"about")==0)
-	    {
+        {
             about();
         }
         else if(strcmp(argval[0],"mkdir")==0)
@@ -109,5 +109,5 @@ int main(int argc, char* argv[])
         {
             clear();
         }
-	}
+    }
 }
