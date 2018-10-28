@@ -4,6 +4,8 @@
 #include <sys/stat.h>   //mkdir
 #include <unistd.h>     //rmdir, pwd
 
+
+
 char * input;
 char* argval[10];
 int argcount = 0;
@@ -74,6 +76,66 @@ void clear()
     write(STDOUT_FILENO,blank,12);
 }
 
+void cp_command(char* source, char* target)
+{
+    FILE *file1, *file2;
+    
+    file1 = fopen(source, "rb");
+    // open the source file and check whether it exists
+    if (file1 == NULL)
+    {
+        perror("Error in reading source file\n" );
+    }
+
+    file2 = fopen(target, "wb"); // open the target file to write to it
+
+    int line;
+    line = fgetc(file1);
+
+    while (line != EOF)
+    {
+        // putchar(line);
+        fputc(line, file2);
+        line = fgetc(file1);
+    }
+
+    fclose(file1);
+    fclose(file2);
+}
+
+void mv_command(char* source, char* target)
+{
+    int returnval;
+    // Rename moves the file from previous location to new loaction
+    returnval = rename(source, target);
+
+    if( returnval == 0)
+    {
+        printf("File moved successfully");
+    }
+    else
+    {
+        printf("Error: unable to move the file");
+    }
+}
+
+void rm_command(char* path)
+{
+    int returnval;
+    // Delete the file at path
+    returnval = remove(path);
+
+    if( returnval == 0)
+    {
+        printf("File/Directory deleted successfully");
+    }
+    else
+    {
+        printf("Error: unable to delete");
+    }
+   
+}
+
 
 int main(int argc, char* argv[])
 {
@@ -109,5 +171,28 @@ int main(int argc, char* argv[])
         {
             clear();
         }
+        else if(strcmp(argval[0],"cp")==0)
+        {
+            char* source, terminal;
+            source = argval[1];
+            terminal = argval[2];
+
+            cp_command(source, terminal);
+        }
+        else if(strcmp(argval[0],"mv")==0)
+        {
+            char* source, terminal;
+            source = argval[1];
+            terminal = argval[2];
+
+            mv_command(source, terminal);
+        }
+        else if(strcmp(argval[0],"rm")==0)
+        {
+            char* file;
+            file = argval[1];
+            rm_command(source, terminal);
+        }
+
     }
 }
