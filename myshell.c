@@ -202,7 +202,7 @@ void rm_command(char* path)
 }
 
 void uniq_func(char* file_name)
-{   
+{ 
    char ch;
    char arr[100][1000];
    char line[100];
@@ -214,6 +214,7 @@ void uniq_func(char* file_name)
    if (fp == NULL)
    {
       perror("Error while opening the file.\n");
+      exit(EXIT_FAILURE);
    }
   
    int i = 0;
@@ -221,13 +222,14 @@ void uniq_func(char* file_name)
    {
     int j=0;
     while(j<1000){
-        arr[i][j]=line[j];
-        j++;
+      arr[i][j]=line[j];
+      j++;
     }
 
     i++;
     if (i==100){
       perror("File is large.\n");
+      exit(EXIT_FAILURE);
     } 
  }
 
@@ -237,8 +239,8 @@ void uniq_func(char* file_name)
   int u = 0;
 
    while(u < i){
-        arr1[u] = arr[u];
-        u++;
+      arr1[u] = arr[u];
+      u++;
     }
 
 int y, r, p;
@@ -259,19 +261,20 @@ int flg = 0;
     }
     y++;
   }
+
+   // qsort (arr1, i, sizeof (char *), myCompare); 
+
    char* c;
    int k = 0;
 
    fclose(fp);
 
    k = 0;
-   fp = fopen(file_name,"w+");
 
    while(k<p){
-    fprintf(fp,"%s\n", arr2[k]);
+    printf("%s\n", arr2[k]);
     k++;
    }
-   fclose(fp);
 
 }
 
