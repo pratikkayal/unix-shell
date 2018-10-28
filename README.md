@@ -5,15 +5,15 @@
 1. Custom UI
 2. Commands Implemented
 
-   about  
-   mkdir  
-   cat  
-   ls
-   sort
-   uniq
-   touch
-   wc
-   pwd
+   - about  
+   - mkdir  
+   - cat  
+   - ls 
+   - sort 
+   - uniq 
+   - touch 
+   - wc 
+   - pwd 
 
 ---
 # To run:
