@@ -67,7 +67,7 @@ void ls_func(char* dirname)
                 j++;
             }
             
-            if(j!=0 && j%1==0) printf("\n");
+            if(j!=0 && j%1==0) printf("\033[0m\n");
             //printf("\n");
         }
         //printf("\n");

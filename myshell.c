@@ -3,6 +3,14 @@
 #include<string.h>
 #include <sys/stat.h>   //mkdir
 #include <unistd.h>     //rmdir, pwd
+#include <pwd.h>        //pwd
+#include <dirent.h>     //ls
+#define CYAN "\x1b[96m"
+#define GREEN "\x1b[92m"
+#define BLUE "\x1b[94m"
+#define BOLDCYAN    "\033[1m\033[36m" 
+#define BOLDGREEN   "\033[1m\033[32m"
+#define BOLDBLUE    "\033[1m\033[34m"  
 
 
 
@@ -184,22 +192,7 @@ void mv_command(char* source, char* target)
     }
 }
 
-void rm_command(char* path)
-{
-    int returnval;
-    // Delete the file at path
-    returnval = remove(path);
 
-    if( returnval == 0)
-    {
-        printf("File/Directory deleted successfully");
-    }
-    else
-    {
-        printf("Error: unable to delete");
-    }
-   
-}
 
 void uniq_func(char* file_name)
 { 
@@ -339,6 +332,7 @@ void sort_func(char* file_name)
 
 }
 
+
 void cat_func(char* filename)
 { 
 
@@ -399,7 +393,8 @@ void ls_func(char* dirname)
                 j++;
             }
             
-            if(j!=0 && j%1==0) printf("\n");
+            if(j!=0 && j%1==0) printf("\033[0m\n");
+            //printf("\033[0m;")
             //printf("\n");
         }
         //printf("\n");
@@ -411,24 +406,7 @@ void ls_func(char* dirname)
 
 }
 
-void pwd_func(char* pwdpath,int printornot) // if printornot=1 --> print 
-{
-    char temp[1000];
-    char* path=getcwd(temp, sizeof(temp));
-    if(path != NULL)
-    {
-        strcpy(pwdpath,temp);
-        if(printornot==1)  
-        {
-            printf("%s\n",pwdpath);
-        }
-    }
-    else 
-    {
 
-    }
-
-}
 
 
 int main(int argc, char* argv[])
@@ -487,12 +465,12 @@ int main(int argc, char* argv[])
 
             mv_command(source, terminal);
         }
-        else if(strcmp(argval[0],"rm")==0)
-        {
-            char* file;
-            file = argval[1];
-            rm_command(source, terminal);
-        }
+        // else if(strcmp(argval[0],"rm")==0)
+        // {
+        //     char* file;
+        //     file = argval[1];
+        //     rm_command(source, terminal);
+        // }
         else if(strcmp(argval[0],"touch")==0)
         {
             touch_func(argcount, argval);
@@ -519,11 +497,11 @@ int main(int argc, char* argv[])
         {
             char* dirname;
             dirname = argval[1];
-            cat_func(dirname);
+            ls_func(dirname);
         }
         else if(strcmp(argval[0],"pwd")==0)
         {
-            char* pwdpath=argv[1];
+            char pwdpath[1000];
             pwd_func(pwdpath,1);
         }
         
