@@ -18,6 +18,8 @@
 #include "./Commands/free.c"
 #include "./Commands/ifconfig.c"
 #include "./Commands/lscpu.c"
+#include "./Commands/ps.c"
+
 
 
 #define CYAN "\x1b[96m"
@@ -204,6 +206,10 @@ int main(int argc, char* argv[])
         else if(strcmp(argval[0],"lscpu")==0)
         {
             lscpu_command();
+        }
+        else if(strcmp(argval[0],"ps")==0)
+        {
+            ps_command();
         }
     }
 }
