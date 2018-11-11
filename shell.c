@@ -11,7 +11,7 @@ int main(int argc,char* argv[]){
 	if ( pid == -1)
 		perror("fork error");
 	else if (pid == 0) {
-		execlp("/usr/bin/gnome-terminal", "--disable-factory", "-e", "./myshell", NULL);
+		execlp("/usr/bin/gnome-terminal", "--disable-factory", "-e", "./modular_shell", NULL);
 	}
 	else {
 		;

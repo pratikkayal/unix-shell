@@ -24,15 +24,15 @@ void mv_command(char* source, char* target)
 
 // main function to test
 
-void main()
-{
-	// char source[50], target[50];
+// void main()
+// {
+// 	// char source[50], target[50];
 
-	// printf("Enter name of file to copy\n");
-	// gets(source);
+// 	// printf("Enter name of file to copy\n");
+// 	// gets(source);
 
-	// printf("Enter name of target file\n");
-	// gets(target);
+// 	// printf("Enter name of target file\n");
+// 	// gets(target);
 
-	// mv_command(source, target);
-}
+// 	// mv_command(source, target);
+// }

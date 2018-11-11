@@ -22,8 +22,8 @@ void pwd_func(char* pwdpath,int printornot) // if printornot=1 --> print
 
 }
 
-void main(int argc, char* argv[])
-{
-    char* pwdpath=argv[1];
-    pwd_func(pwdpath,1);
-}
+// void main(int argc, char* argv[])
+// {
+//     char* pwdpath=argv[1];
+//     pwd_func(pwdpath,1);
+// }

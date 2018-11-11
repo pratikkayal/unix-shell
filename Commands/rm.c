@@ -26,12 +26,12 @@ void rm_command(char* path)
 
 // main function to test
 
-void main()
-{
-	// char source[50];
+// void main()
+// {
+// 	// char source[50];
 
-	// printf("Enter name of file to delete\n");
-	// gets(source);
+// 	// printf("Enter name of file to delete\n");
+// 	// gets(source);
 
-	// rm_command(source);
-}
+// 	// rm_command(source);
+// }

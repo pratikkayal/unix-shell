@@ -81,11 +81,11 @@ int flg = 0;
 
 }
 
-int main(int argc, char* argv[])
-{
+// int main(int argc, char* argv[])
+// {
 
-	char* file_name = argv[1];
-	uniq_func(file_name);
-	return 0;
+// 	char* file_name = argv[1];
+// 	uniq_func(file_name);
+// 	return 0;
 
-}
+// }

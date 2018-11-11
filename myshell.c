@@ -451,7 +451,8 @@ int main(int argc, char* argv[])
 
         else if(strcmp(argval[0],"cp")==0)
         {
-            char* source, terminal;
+            char* source;
+            char* terminal;
             source = argval[1];
             terminal = argval[2];
 
@@ -459,7 +460,8 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(argval[0],"mv")==0)
         {
-            char* source, terminal;
+            char* source;
+            char* terminal;
             source = argval[1];
             terminal = argval[2];
 
@@ -504,9 +506,5 @@ int main(int argc, char* argv[])
             char pwdpath[1000];
             pwd_func(pwdpath,1);
         }
-        
-
-
-
     }
 }

@@ -79,9 +79,9 @@ void ls_func(char* dirname)
 
 }
 
-void main(int argc, char* argv[])
-{
+// void main(int argc, char* argv[])
+// {
 
-    char* dirname = argv[1];
-    ls_func(dirname);
-}
+//     char* dirname = argv[1];
+//     ls_func(dirname);
+// }

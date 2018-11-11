@@ -22,10 +22,10 @@ void cat_func(char* filename)
 }
 
 
-void main(int argc,char*argv[])
-{
+// void main(int argc,char*argv[])
+// {
 
-	char* filename = argv[1];
-	cat_func(filename);
+// 	char* filename = argv[1];
+// 	cat_func(filename);
 
-}
+// }

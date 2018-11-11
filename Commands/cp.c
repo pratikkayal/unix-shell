@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void cp_command(char* source, char* target);
 
 void cp_command(char* source, char* target)
 {
@@ -34,15 +35,15 @@ void cp_command(char* source, char* target)
 
 // main function to test
 
-void main()
-{
-	// char source[50], target[50];
+// void main()
+// {
+// 	// char source[50], target[50];
 
-	// printf("Enter name of file to copy\n");
-	// gets(source);
+// 	// printf("Enter name of file to copy\n");
+// 	// gets(source);
 
-	// printf("Enter name of target file\n");
-	// gets(target);
+// 	// printf("Enter name of target file\n");
+// 	// gets(target);
 
-	// cp_command(source, target);
-}
+// 	// cp_command(source, target);
+// }

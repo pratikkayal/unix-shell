@@ -43,11 +43,11 @@ void wc_func(char* file_name)
 
 }
 
-int main(int argc, char* argv[])
-{
+// int main(int argc, char* argv[])
+// {
 
-	char* file_name = argv[1];
-	wc_func(file_name);
-	return 0;
+// 	char* file_name = argv[1];
+// 	wc_func(file_name);
+// 	return 0;
 
-}
+// }

@@ -16,8 +16,8 @@ void touch_func(int argc, char* argv[])
    }
 }
 
-int main(int argc, char* argv[])
-{
-	touch_func(argc, argv);
-	return 0;
-}
+// int main(int argc, char* argv[])
+// {
+// 	touch_func(argc, argv);
+// 	return 0;
+// }
