@@ -243,7 +243,24 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(argval[0],"ps")==0)
         {
-            ps_command();
+            // printf("count %d\n", argcount);
+            // printf("%d\n",strlen(argval[1]));
+            if(argcount==1)
+                ps_command();
+            else if(argcount==2) 
+            {    
+                if(strlen(argval[1])==0)
+                    ps_command();
+                else
+                {
+                    ps_command_pid(argval[1]);
+                }
+            }
+            else if(argcount==3)
+            {
+                if(strcmp(argval[1], "pid") == 0 || strcmp(argval[1], "p") == 0 || strcmp(argval[1], "-pid")==0 || strcmp(argval[1], "-p")==0)
+                    ps_command_pid(argval[2]);
+            }
         }
         else if(strcmp(argval[0],"gcc")==0)
         {
