@@ -19,6 +19,7 @@
 #include "./Commands/ifconfig.c"
 #include "./Commands/lscpu.c"
 #include "./Commands/ps.c"
+#include "./Commands/grep.c"
 
 
 
@@ -62,10 +63,10 @@ void getInput()
     getline(&input,&buf,stdin);
     argcount = 0;
     process_input_inplace(input);
-    printf("\nprocessed input:%s\n\n", input);
+    // printf("\nprocessed input:%s\n\n", input);
     while((argval[argcount] = strsep(&input, " \t\n")) != NULL  && argcount < 9)    //strsep(char **stringp, const char *delim);
     {
-        printf("\nSTART%sEND\n", argval[argcount]);
+        // printf("\nSTART%sEND\n", argval[argcount]);
         if(sizeof(argval[argcount])==0)
         {
             free(argval[argcount]);
@@ -230,6 +231,12 @@ int main(int argc, char* argv[])
         else if(strcmp(argval[0],"ps")==0)
         {
             ps_command();
+        }
+        else if(strcmp(argval[0],"grep")==0)
+        {
+        	char* text = argval[1];
+        	char* filename = argval[2];
+        	grep_func(text, filename);
         }
     }
 }
