@@ -25,7 +25,7 @@
 #include "./Commands/head.c"
 #include "./Commands/tail.c"
 #include "./Commands/cd.c"
-
+#include "./Commands/w.c"
 
 
 #define CYAN "\x1b[96m"
@@ -310,7 +310,7 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(argval[0],"w")==0)
         {
-            // w_func();
+            w_func();
         }
         else if(strcmp(argval[0],"testwc")==0)
         {
