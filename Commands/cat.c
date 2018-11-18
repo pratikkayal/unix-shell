@@ -14,7 +14,7 @@ void cat_func(char* filename)
         	printf("%c",c);
         	count++;
     	}
-    
+    	printf("\n");
     	fclose(file);
     	if(count==0)
     	{

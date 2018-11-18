@@ -355,14 +355,23 @@ int main(int argc, char* argv[])
 
                 }
             }
+            else
+            {
+            	printf("Error in number of arguments");
+            }
         	
         	//grep_func(word, filename);
         }
         else if(strcmp(argval[0],"cat")==0)
         {
-            char* file;
-            file = argval[1];
-            cat_func(file);
+        	if(argcount==2)
+            {			char* file;
+                        file = argval[1];
+                        cat_func(file);}
+            else
+            {
+            	printf("Error in number of arguments\n");
+            }
         }
         else if(strcmp(argval[0],"ls")==0)
         {
@@ -394,32 +403,63 @@ int main(int argc, char* argv[])
 
                 }
             }
+            else
+            {
+            	printf("Error in number of arguments\n");
+            }
             
             
         }
         else if(strcmp(argval[0],"pwd")==0)
         {
-            char pwdpath[1000];
-            pwd_func(pwdpath,1);
+        	if(argcount==1)
+            {
+            	char pwdpath[1000];
+                pwd_func(pwdpath,1);
+            }
+            else
+            {
+            	printf("Error in number of arguments\n");
+
+            }
         }
         else if(strcmp(argval[0],"cd")==0)
         {
-            char* path = argval[1];
-            char pwdpath[1000];
-            cd_func(pwdpath,path);
+        	if(argcount==2)
+            {char* path = argval[1];
+                        char pwdpath[1000];
+                        cd_func(pwdpath,path);}
 
+            else
+            {
+            	printf("Error in number of arguments\n");
+
+            }
         }
         else if(strcmp(argval[0],"head")==0)
         {
-            char* numlines=argval[1];
-            char* filename=argval[2];
-            head_func(numlines,filename);
+        	if(argcount==3)
+            {char* numlines=argval[1];
+                        char* filename=argval[2];
+                        head_func(numlines,filename);}
+
+            else
+            {
+            	printf("Error in number of arguments\n");
+
+            }
         }
         else if(strcmp(argval[0],"tail")==0)
         {
-            char* numlines=argval[1];
-            char* filename=argval[2];
-            tail_func(numlines,filename);
+            if(argcount==3)
+            {char* numlines=argval[1];
+                        char* filename=argval[2];
+                        tail_func(numlines,filename);}
+            else
+            {
+            	printf("Error in number of arguments\n");
+
+            }
  
         }
         else if(strcmp(argval[0],"")==0)

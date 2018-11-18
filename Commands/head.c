@@ -23,7 +23,7 @@ void head_func(char* numlines, char* filename)
                     }
           }
       }
-      
+      printf("\n");
       if(count==0)
       {
           perror("File is empty\n");
