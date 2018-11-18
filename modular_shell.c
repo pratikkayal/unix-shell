@@ -146,8 +146,6 @@ int main(int argc, char* argv[])
         char temp[1000];
         char* path=getcwd(temp, sizeof(temp));
         printf("%s>>", temp);
-        // printf(">>");
-        // scanf("%s",input); //fails due to spaces, tabs
         getInput();
 
         if(strcmp(argval[0],"about")==0)
@@ -156,8 +154,12 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(argval[0],"mkdir")==0)
         {
-            char* foldername = argval[1];
-            mkdir_func(foldername);
+            if(argval==NULL) perror("+--- Error in mkdir ");
+            else
+            {
+                char* foldername = argval[1];
+                mkdir_func(foldername);
+            }
         }
         else if(strcmp(argval[0],"exit")==0)
         {
@@ -165,8 +167,12 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(argval[0],"rmdir")==0)
         {
-            char* foldername = argval[1];
-            rmdir_func(foldername);
+            if(argval==NULL) perror("+--- Error in rmdir ");
+            else
+            {
+                char* foldername = argval[1];
+                rmdir_func(foldername);
+            }
         }
         else if(strcmp(argval[0],"clear")==0)
         {
@@ -268,8 +274,21 @@ int main(int argc, char* argv[])
         else if(strcmp(argval[0],"gcc")==0)
         {
             int i=0;
+<<<<<<< HEAD
             gcc_func(i);
 >>>>>>> ba7276a39227ad0b59bbe1e8607e8291a4619d36
+=======
+            if(strcmp(argval[2],"-o")!=0) {
+                i=1;
+                perror("+--- Error in format \n Correct format: gcc filename1 -o filename2 for");}
+            else if(argval[3]==NULL || strcmp(argval[2]," ")==0) {
+                i=1;
+                perror("+--- Error in format \n Correct format: gcc filename1 -o filename2 for");}
+            else {
+                printf("gcc Done!\n");
+                gcc_func(i);
+            }
+>>>>>>> 8c517ae1a0815f049c5b619baaa8c278650a4937
         }
         else if(strcmp(argval[0],"grep")==0)
         {
