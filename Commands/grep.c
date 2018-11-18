@@ -2,25 +2,113 @@
 #include<string.h>
 
 void grep_func(char* word, char* filename)
-{
-    printf("commands/grep ke andar%s, %s\n", word, filename);
-    FILE *fp;
-    char line[1000];
-    fp = fopen(filename,"r");
-    while(fscanf(fp , "%[^\n]\n" , line)!=EOF)
-    {
-        if(strstr(line , word) !=NULL)
-        {
-                // print that line
-                printf("%s\n" , line);
-        }
-        else
-        {
-                continue;
-        }
-    }
-    fclose(fp);
+{   
 
+    //int w = strlen(word);
+
+    printf("%s %s\n",word,filename);
+    FILE * file;
+    char c;
+    char line[1000];
+    memset(line,0,sizeof(line));
+    int count=0;
+    int j=0;
+
+    int flag=0;
+
+    file = fopen( filename , "r");
+    
+    if (file) 
+    {   
+        
+        while((c=fgetc(file))!=EOF)
+        {       
+            if(c=='\n')
+            {
+                line[j]='\0';
+            
+                if(strstr(line , word)!=NULL)
+                {
+                    flag=1;
+                    printf("%s\n",line);
+                }
+                memset(line,0,sizeof(line));
+                j=0;
+                count++;
+            }
+            else
+            {
+                line[j]=c;
+                j++;
+            }
+
+        }
+    
+        if(flag==0)
+        {
+            perror("Warning : word not present in file\n");
+        }
+        fclose(file);
+    }
+    else
+    {
+        perror("No such file \n");
+    }
+}
+
+
+void grep_func_linecount(char* word, char* filename, char* options)
+{   
+
+    //int w = strlen(word);
+
+    FILE * file;
+    char c;
+    char line[1000];
+    memset(line,0,sizeof(line));
+    int count=0;
+    int j=0;
+
+    int flag=0;
+
+    file = fopen( filename , "r");
+    
+    if (file) 
+    {   
+        while((c=fgetc(file))!=EOF)
+        {       
+            if(c=='\n')
+            {
+                line[j]='\0';
+
+                if(strstr(line , word)!=NULL)
+                {
+                    flag=1;
+                    printf("%d\t",count+1);
+                    printf("%s\n",line);
+                }
+                memset(line,0,sizeof(line));
+                j=0;
+                count++;
+            }
+            else
+            {
+                line[j]=c;
+                j++;
+            }
+
+        }
+    
+        if(flag==0)
+        {
+            perror("Warning : word not present in file\n");
+        }
+        fclose(file);
+    }
+    else
+    {
+        perror("No such file \n");
+    }
 }
 
 // void main(int argc , char *argv[])
