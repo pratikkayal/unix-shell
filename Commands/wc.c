@@ -3,11 +3,14 @@
 #include <string.h> 
 
 
-void wc_func(char* file_name)
+int wc_func(char* file_name)
 {	
    char arr[100][1000];
    char line[1000];
 
+   int char_count = 0;
+   int word_count = 0;
+   
    FILE *fp;
  
    fp = fopen(file_name, "r"); 
@@ -19,9 +22,6 @@ void wc_func(char* file_name)
    else{
 
             int i = 0;
-            int char_count = 0;
-            int word_count = 0;
-
             while((fgets(line, 1000, fp)) != NULL)
             {
                int j=0;
@@ -53,7 +53,9 @@ void wc_func(char* file_name)
                }
    }
    
-}}
+}
+return word_count;
+}
 
 // int main(int argc, char* argv[])
 // {

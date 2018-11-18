@@ -32,6 +32,27 @@
 #define BOLDGREEN   "\033[1m\033[32m"
 #define BOLDBLUE    "\033[1m\033[34m"  
 
+
+//////////////Test Block////////////////////
+
+// #include "minunit.h"
+
+int wc = 0;
+int wc_test = 50;
+// int test_run =0;
+// static char * test_wc() 
+// {
+//     mu_assert("error, wc is not correct", wc == wc_test);
+//     return 0;
+// }
+
+// static char * all_tests() {
+// mu_run_test(test_wc);
+// return 0;
+// }
+
+////////////////////////////////////////////
+
 char* input;
 char* argval[10];
 int argcount = 0;
@@ -181,7 +202,7 @@ int main(int argc, char* argv[])
         else if(strcmp(argval[0],"wc")==0)
         {
             char* foldername = argval[1];
-            wc_func(foldername);
+            wc = wc_func(foldername);
         }
 
         else if(strcmp(argval[0],"cp")==0)
@@ -296,6 +317,31 @@ int main(int argc, char* argv[])
         else if(strcmp(argval[0],"w")==0)
         {
             // w_func();
+        }
+        else if(strcmp(argval[0],"testwc")==0)
+        {
+            char* foldername = "./wc_test.txt";
+            wc = wc_func(foldername);
+            
+            if (wc == wc_test)
+            {
+                printf("Test Successful\n");
+            }
+            else
+            {
+                printf("Test Fail\n");
+            }
+
+            // char* test_results = all_tests();
+
+            // if (test_result != 0)
+            // {
+            //     printf("%s\n", test_result);
+            // }
+            // else
+            // {
+            //     printf("ALL TESTS PASSED\n");
+            // }
         }
         else if(strcmp(argval[0],"")==0)
         {
