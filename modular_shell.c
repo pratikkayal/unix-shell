@@ -96,13 +96,13 @@ void mkdir_func(char* name)
 
     if(retCode==-1)
     {
-        perror("+--- Error in mkdir ");
+        perror("Error");
     }
     
 }
 
 void gcc_func(int i){
-    if(i=0)
+    if(i==0)
         execlp("gcc","gcc",argval[1],argval[2],argval[3],(char *)NULL);
 
 }
@@ -113,7 +113,7 @@ void rmdir_func(char* name)
     int retCode = rmdir(name);
     if(retCode==-1)
     {
-        perror("+--- Error in rmdir ");
+        perror("Error");
     }
 }
 
@@ -154,12 +154,8 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(argval[0],"mkdir")==0)
         {
-            if(argval==NULL) perror("+--- Error in mkdir ");
-            else
-            {
-                char* foldername = argval[1];
-                mkdir_func(foldername);
-            }
+            char* foldername = argval[1];
+            mkdir_func(foldername);
         }
         else if(strcmp(argval[0],"exit")==0)
         {
@@ -167,12 +163,9 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(argval[0],"rmdir")==0)
         {
-            if(argval==NULL) perror("+--- Error in rmdir ");
-            else
-            {
-                char* foldername = argval[1];
-                rmdir_func(foldername);
-            }
+
+            char* foldername = argval[1];
+            rmdir_func(foldername);
         }
         else if(strcmp(argval[0],"clear")==0)
         {
@@ -214,9 +207,18 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(argval[0],"sort")==0)
         {
-            char* file;
-            file = argval[1];
-            sort_func(file);
+            char* name;
+            name = argval[1];
+
+            if (strcmp(name,"-o")==0){
+                sort_func_o(argval[2], argval[3]);
+            }
+            else if(strcmp(name,"-r")==0){
+                sort_func_r(argval[2]);
+            }
+            else{
+                sort_func(name);
+            }
         }
          else if(strcmp(argval[0],"cat")==0)
         {
@@ -278,10 +280,10 @@ int main(int argc, char* argv[])
 
             if(strcmp(argval[2],"-o")!=0) {
                 i=1;
-                perror("+--- Error in format \n Correct format: gcc filename1 -o filename2 for");}
+                perror("Error in format \n Correct format: gcc filename1 -o filename2 for");}
             else if(argval[3]==NULL || strcmp(argval[2]," ")==0) {
                 i=1;
-                perror("+--- Error in format \n Correct format: gcc filename1 -o filename2 for");}
+                perror("Error in format \n Correct format: gcc filename1 -o filename2 for");}
             else {
                 printf("gcc Done!\n");
                 gcc_func(i);
