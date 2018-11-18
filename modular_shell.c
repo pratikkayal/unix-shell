@@ -249,6 +249,7 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(argval[0],"ps")==0)
         {
+
              ps_command();
 
             // printf("count %d\n", argcount);
