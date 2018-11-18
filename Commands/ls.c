@@ -1,6 +1,10 @@
 # include <stdio.h>
 #include <dirent.h>
 #include<string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
 #define CYAN "\x1b[96m"
 #define GREEN "\x1b[92m"
 #define BLUE "\x1b[94m"
@@ -30,8 +34,10 @@ void nameFile(struct dirent* name,char* followup)
 
 void ls_func(char* dirname)
 { 
+
     int i=0;
     struct dirent **dir;
+    struct stat sb;
     int numfiles = scandir(dirname, &dir, 0, alphasort);
     int j=0;
     if (numfiles >= 0)
@@ -48,6 +54,7 @@ void ls_func(char* dirname)
                 {
                     printf("%s\t\t", name->d_name);
                 }
+
                 else if(name->d_type == DT_CHR)    // a character device 
                 {
                     printf("%s%s\t\t",CYAN, name->d_name);
@@ -59,6 +66,10 @@ void ls_func(char* dirname)
                 else if(name->d_type == DT_DIR)    // a directory
                 {
                     printf("%s%s\t\t",BOLDBLUE, name->d_name);
+                }
+                else if (stat(dir[i]->d_name, &sb) == 0 && sb.st_mode & S_IXUSR)
+                {
+                    printf("%s%s\t\t",GREEN, name->d_name);
                 }
                 else                              // unknown file types
                 {
@@ -74,7 +85,65 @@ void ls_func(char* dirname)
     }
     else
     {
+        perror("Empty directory\n");
+    }
+
+}
+void ls_func_present(char* dirname)
+{ 
+    int i=0;
+    struct dirent **dir;
+    struct stat sb;
+    int numfiles = scandir(dirname, &dir, 0, alphasort);
+    int j=0;
+    if (numfiles >= 0)
+    {
         
+        for(i = 0; i < numfiles; i++ )
+        {
+            if((strcmp(dir[i]->d_name,".")!=0 && strcmp(dir[i]->d_name,"..")!=0) && dir[i]->d_name[0]!='.')            
+            {
+
+                struct dirent* name=dir[i];
+                //char names[20]=dir[i]->d_name;
+                
+                if(name->d_type == DT_DIR)    // a directory
+                {
+                    printf("%s%s\t\t",BOLDBLUE, name->d_name);
+                }
+                else if (stat(dir[i]->d_name, &sb) == 0 && sb.st_mode & S_IXUSR)
+                {
+                    printf("%s%s\t\t",BOLDGREEN, name->d_name);
+                }
+                else if(name->d_type == DT_REG)          // regular file
+                {
+                    printf("%s\t\t", name->d_name);
+                }
+                else if(name->d_type == DT_CHR)    // a character device 
+                {
+                    printf("%s%s\t\t",CYAN, name->d_name);
+                }
+                else if(name->d_type == DT_FIFO)    // a named pipe 
+                {
+                    printf("%s%s\t\t",GREEN, name->d_name);
+                }
+                else                              // unknown file types
+                {
+                    printf("%s%s\t\t",BOLDCYAN, name->d_name);
+                }
+                
+                
+                j++;
+            }
+            
+            if(j!=0 && j%1==0) printf("\033[0m\n");
+            //printf("\n");
+        }
+        //printf("\n");
+    }
+    else
+    {
+        perror("Empty directory\n");
     }
 
 }

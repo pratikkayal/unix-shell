@@ -22,7 +22,10 @@
 #include "./Commands/lscpu.c"
 #include "./Commands/ps.c"
 #include "./Commands/grep.c"
-// #include "./Commands/w.c"
+#include "./Commands/head.c"
+#include "./Commands/tail.c"
+#include "./Commands/cd.c"
+
 
 
 #define CYAN "\x1b[96m"
@@ -117,13 +120,13 @@ void mkdir_func(char* name)
 
     if(retCode==-1)
     {
-        perror("+--- Error in mkdir ");
+        perror("Error");
     }
     
 }
 
 void gcc_func(int i){
-    if(i=0)
+    if(i==0)
         execlp("gcc","gcc",argval[1],argval[2],argval[3],(char *)NULL);
 
 }
@@ -134,7 +137,7 @@ void rmdir_func(char* name)
     int retCode = rmdir(name);
     if(retCode==-1)
     {
-        perror("+--- Error in rmdir ");
+        perror("Error");
     }
 }
 
@@ -166,7 +169,8 @@ int main(int argc, char* argv[])
     {
         char temp[1000];
         char* path=getcwd(temp, sizeof(temp));
-        printf("%s>>", temp);
+        printf("%s%s",BOLDCYAN, temp);
+        printf("\033[0m");
         getInput();
 
         if(strcmp(argval[0],"about")==0)
@@ -175,12 +179,8 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(argval[0],"mkdir")==0)
         {
-            if(argval==NULL) perror("+--- Error in mkdir ");
-            else
-            {
-                char* foldername = argval[1];
-                mkdir_func(foldername);
-            }
+            char* foldername = argval[1];
+            mkdir_func(foldername);
         }
         else if(strcmp(argval[0],"exit")==0)
         {
@@ -188,12 +188,9 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(argval[0],"rmdir")==0)
         {
-            if(argval==NULL) perror("+--- Error in rmdir ");
-            else
-            {
-                char* foldername = argval[1];
-                rmdir_func(foldername);
-            }
+
+            char* foldername = argval[1];
+            rmdir_func(foldername);
         }
         else if(strcmp(argval[0],"clear")==0)
         {
@@ -247,26 +244,18 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(argval[0],"sort")==0)
         {
-            char* file;
-            file = argval[1];
-            sort_func(file);
-        }
-         else if(strcmp(argval[0],"cat")==0)
-        {
-            char* file;
-            file = argval[1];
-            cat_func(file);
-        }
-        else if(strcmp(argval[0],"ls")==0)
-        {
-            char* dirname;
-            dirname = argval[1];
-            ls_func(dirname);
-        }
-        else if(strcmp(argval[0],"pwd")==0)
-        {
-            char pwdpath[1000];
-            pwd_func(pwdpath,1);
+            char* name;
+            name = argval[1];
+
+            if (strcmp(name,"-o")==0){
+                sort_func_o(argval[2], argval[3]);
+            }
+            else if(strcmp(name,"-r")==0){
+                sort_func_r(argval[2]);
+            }
+            else{
+                sort_func(name);
+            }
         }
         else if(strcmp(argval[0],"free")==0)
         {
@@ -309,21 +298,15 @@ int main(int argc, char* argv[])
 
             if(strcmp(argval[2],"-o")!=0) {
                 i=1;
-                perror("+--- Error in format \n Correct format: gcc filename1 -o filename2 for");}
+                perror("Error in format \n Correct format: gcc filename1 -o filename2 for");}
             else if(argval[3]==NULL || strcmp(argval[2]," ")==0) {
                 i=1;
-                perror("+--- Error in format \n Correct format: gcc filename1 -o filename2 for");}
+                perror("Error in format \n Correct format: gcc filename1 -o filename2 for");}
             else {
                 printf("gcc Done!\n");
                 gcc_func(i);
             }
 
-        }
-        else if(strcmp(argval[0],"grep")==0)
-        {
-        	char* text = argval[1];
-        	char* filename = argval[2];
-        	grep_func(text, filename);
         }
         else if(strcmp(argval[0],"w")==0)
         {
@@ -353,6 +336,91 @@ int main(int argc, char* argv[])
             // {
             //     printf("ALL TESTS PASSED\n");
             // }
+        }
+        else if(strcmp(argval[0],"grep")==0)
+        {
+            char* word = argval[1];
+            char* filename = argval[2];
+            char* options=argval[3];
+            if(argcount==3)
+                grep_func(word, filename);
+            else if(argcount==4) 
+            {    
+                if(strlen(argval[3])==0)
+                    grep_func(word, filename);
+
+                else if(strcmp(options,"-n")==0)
+                {
+                    grep_func_linecount(word, filename,options);
+
+                }
+            }
+        	
+        	//grep_func(word, filename);
+        }
+        else if(strcmp(argval[0],"cat")==0)
+        {
+            char* file;
+            file = argval[1];
+            cat_func(file);
+        }
+        else if(strcmp(argval[0],"ls")==0)
+        {
+
+            char* dirname;
+            // dirname=argval[1];
+            // ls_func(dirname);
+
+
+            if(argcount==1)
+            {
+                dirname=(".");
+                ls_func_present(dirname);
+            }
+                
+            else if(argcount==2) 
+            {    
+                if(strlen(argval[1])==0)
+                {
+                    dirname=(".");
+                    ls_func_present(dirname);
+                }
+                    
+
+                else 
+                {
+                    dirname=argval[1];
+                    ls_func(dirname);
+
+                }
+            }
+            
+            
+        }
+        else if(strcmp(argval[0],"pwd")==0)
+        {
+            char pwdpath[1000];
+            pwd_func(pwdpath,1);
+        }
+        else if(strcmp(argval[0],"cd")==0)
+        {
+            char* path = argval[1];
+            char pwdpath[1000];
+            cd_func(pwdpath,path);
+
+        }
+        else if(strcmp(argval[0],"head")==0)
+        {
+            char* numlines=argval[1];
+            char* filename=argval[2];
+            head_func(numlines,filename);
+        }
+        else if(strcmp(argval[0],"tail")==0)
+        {
+            char* numlines=argval[1];
+            char* filename=argval[2];
+            tail_func(numlines,filename);
+ 
         }
         else if(strcmp(argval[0],"")==0)
         {
