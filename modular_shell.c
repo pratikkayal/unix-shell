@@ -271,10 +271,16 @@ int main(int argc, char* argv[])
         else if(strcmp(argval[0],"gcc")==0)
         {
             int i=0;
-            // if(argval[1]=='-o') perror("+--- Error in rmdir ");
-            if(argval[2]=='-o') perror("+--- Error in format ");
-            else if(argval[3]!=NULL) perror("+--- Error in format ");
-            gcc_func(i);
+            if(strcmp(argval[2],"-o")!=0) {
+                i=1;
+                perror("+--- Error in format \n Correct format: gcc filename1 -o filename2 for");}
+            else if(argval[3]==NULL || strcmp(argval[2]," ")==0) {
+                i=1;
+                perror("+--- Error in format \n Correct format: gcc filename1 -o filename2 for");}
+            else {
+                printf("gcc Done!\n");
+                gcc_func(i);
+            }
         }
         else if(strcmp(argval[0],"grep")==0)
         {
