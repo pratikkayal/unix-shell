@@ -11,11 +11,14 @@ void cp_command(char* source, char* target)
 	// open the source file and check whether it exists
 	if (file1 == NULL)
 	{
-		perror("Error in reading source file\n" );
+		printf("Error in reading source file\n" );
 	}
 
 	file2 = fopen(target, "wb"); // open the target file to write to it
-
+	if (file2 == NULL)
+	{
+		printf("Error in opening target file\n" );
+	}
 	int line;
 	line = fgetc(file1);
 
