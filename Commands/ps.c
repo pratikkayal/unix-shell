@@ -60,7 +60,7 @@ char *getusername(char *uid_str)
 
 void ps_command()
 {
-	printf("Hi from ps_command\n");
+	// printf("Hi from ps_command\n");
 
 	DIR *procdir;	//to read and iterate through directory
 	FILE *filep;
@@ -179,7 +179,7 @@ void ps_command()
 
 void ps_command_pid(char* var)
 {
-	printf("Hi from ps_command_pid\n");
+	// printf("Hi from ps_command_pid\n");
 
 	char* pid = var;
 	// printf("%s\n", pid);
