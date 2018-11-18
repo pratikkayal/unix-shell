@@ -8,13 +8,9 @@ void mv_command(char* source, char* target)
 	// Rename moves the file from previous location to new loaction
 	returnval = rename(source, target);
 
-	if( returnval == 0)
+	if( returnval != 0)
 	{
-		printf("File moved successfully");
-	}
-	else
-	{
-		printf("Error: unable to move the file");
+		perror("Error");
 	}
    
 }
