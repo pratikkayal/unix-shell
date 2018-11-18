@@ -209,19 +209,31 @@ int main(int argc, char* argv[])
         {
             char* source;
             char* terminal;
-            source = argval[1];
-            terminal = argval[2];
-
-            cp_command(source, terminal);
+            if(argcount==3)
+            {
+                source = argval[1];
+                terminal = argval[2];
+                cp_command(source, terminal);
+            }
+            else
+            {
+                perror("Error in arguments");
+            }
         }
         else if(strcmp(argval[0],"mv")==0)
         {
             char* source;
             char* terminal;
-            source = argval[1];
-            terminal = argval[2];
-
-            mv_command(source, terminal);
+            if(argcount==3)
+            {
+                source = argval[1];
+                terminal = argval[2];
+                mv_command(source, terminal);
+            }
+            else
+            {
+                perror("Error in arguments");
+            }
         }
         else if(strcmp(argval[0],"touch")==0)
         {
@@ -270,8 +282,6 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(argval[0],"ps")==0)
         {
-
-            ps_command();
 
             // printf("count %d\n", argcount);
             // printf("%d\n",strlen(argval[1]));
