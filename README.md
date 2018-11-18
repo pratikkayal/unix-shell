@@ -44,4 +44,4 @@ Commands Implemented
 ---
 # To run:
 1. Compile shell.c and modular_shell.c files
-2. run ./shell
+2. run ./shell or run make
