@@ -146,8 +146,6 @@ int main(int argc, char* argv[])
         char temp[1000];
         char* path=getcwd(temp, sizeof(temp));
         printf("%s>>", temp);
-        // printf(">>");
-        // scanf("%s",input); //fails due to spaces, tabs
         getInput();
 
         if(strcmp(argval[0],"about")==0)
@@ -156,8 +154,12 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(argval[0],"mkdir")==0)
         {
-            char* foldername = argval[1];
-            mkdir_func(foldername);
+            if(argval==NULL) perror("+--- Error in mkdir ");
+            else
+            {
+                char* foldername = argval[1];
+                mkdir_func(foldername);
+            }
         }
         else if(strcmp(argval[0],"exit")==0)
         {
@@ -165,8 +167,12 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(argval[0],"rmdir")==0)
         {
-            char* foldername = argval[1];
-            rmdir_func(foldername);
+            if(argval==NULL) perror("+--- Error in rmdir ");
+            else
+            {
+                char* foldername = argval[1];
+                rmdir_func(foldername);
+            }
         }
         else if(strcmp(argval[0],"clear")==0)
         {
@@ -248,6 +254,9 @@ int main(int argc, char* argv[])
         else if(strcmp(argval[0],"gcc")==0)
         {
             int i=0;
+            // if(argval[1]=='-o') perror("+--- Error in rmdir ");
+            if(argval[2]=='-o') perror("+--- Error in format ");
+            else if(argval[3]!=NULL) perror("+--- Error in format ");
             gcc_func(i);
         }
         else if(strcmp(argval[0],"grep")==0)
