@@ -4,18 +4,39 @@
 ---
 1. Custom UI
 2. Commands Implemented
+   File system related
+   	- mkdir  
+   	- cat  
+   	- ls
+   	- cd
+   	- rmdir
+   	- rm 
+   	- pwd
+	- cp
+   	- mv
+   	- touch
 
-   - about  
-   - mkdir  
-   - cat  
-   - ls 
-   - sort 
-   - uniq 
-   - touch 
-   - wc 
-   - pwd 
+   File Operations
+   	- wc
+   	- sort 
+   	- uniq 
+   	
+   System Information
+   	- ifconfig
+   	- lscpu
+   	- free
+   	- w
+   	- ps
 
+   Shell UI related
+   	- exit
+   	- clear
+   	- about
+
+   Executable
+   	- gcc
+   
 ---
 # To run:
-1. Compile both .c files
+1. Compile shell.c and modular_shell.c files
 2. run ./shell

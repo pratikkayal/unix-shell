@@ -105,7 +105,7 @@ void getInput()
 /* about function*/
 void about()
 {
-    char* aboutStr = "\n  Made By:\n\n \t Pratik Kayal\n\t Pranjali Jain\n\t Naman Jain\n\t Soham Pachpandes\n";
+    char* aboutStr = "\n  Made By:\n\n \t Pratik Kayal\n\t Pranjali Jain\n\t Naman Jain\n\t Soham Pachpande\n";
 
     printf("%s",aboutStr);
 }
@@ -271,7 +271,7 @@ int main(int argc, char* argv[])
         else if(strcmp(argval[0],"ps")==0)
         {
 
-             ps_command();
+            ps_command();
 
             // printf("count %d\n", argcount);
             // printf("%d\n",strlen(argval[1]));
