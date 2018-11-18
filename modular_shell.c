@@ -30,47 +30,26 @@
 #define BOLDBLUE    "\033[1m\033[34m"  
 
 
-char *process_input(char *text) {
-   int length, c, d;
-   char *start;
-   
-   c = d = 0;
-   
-   length = strlen(text);
- 
-   start = (char*)malloc(length+1);
-   
-   if (start == NULL)
-      exit(EXIT_FAILURE);
-   
-   while (*(text+c) != '\0')
-   {
-   		if (*(text+c) == ' ')
-      	{
-        	int temp = c + 1;
-         	if (*(text+temp) != '\0') 
-         	{
-	            while (*(text+temp) != '\0')
-	            {
-	               	if (*(text+temp) == ' ' || *(text+temp) == '\t')
-	               	{
-	               		c++;
-	               	}  
-	               	temp++;
-            	}
-        	}
-    	}
-	    *(start+d) = *(text+c);
-	    c++;
-	    d++;
-   	}
-   	*(start+d)= '\0';
-   
-   	return start;
+void process_input_inplace(char *text) 
+{
+	char* final = text;
+
+	// loop while end of string '\0' is not reached
+	while(*text != '\0')
+	{
+		// while((*text == ' ' && *(text+1) == ' ') || (*text == '\t' && *(text+1) == '\t'))
+		while(((*(text) == ' ') || (*(text) == '\t')) && ((*(text+1) == ' ')||(*(text+1) == '\t')))
+		{
+			text++;
+		}
+		*final++ = *text++;
+	}
+
+	*final = '\0';	
 }
 
 
-char * input;
+char* input;
 char* argval[10];
 int argcount = 0;
 int exitflag=0;
@@ -82,11 +61,11 @@ void getInput()
     ssize_t buf = 0;
     getline(&input,&buf,stdin);
     argcount = 0;
-    input = process_input(input);
-    printf("\nprocessed input:%s\n", input);
+    process_input_inplace(input);
+    printf("\nprocessed input:%s\n\n", input);
     while((argval[argcount] = strsep(&input, " \t\n")) != NULL  && argcount < 9)    //strsep(char **stringp, const char *delim);
     {
-        printf("\nSTART%sEND Size:%d\n", argval[argcount], strlen(argval[argcount]));
+        printf("\nSTART%sEND\n", argval[argcount]);
         if(sizeof(argval[argcount])==0)
         {
             free(argval[argcount]);
