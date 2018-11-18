@@ -2,8 +2,13 @@
 
 # Features:
 ---
-1. Custom UI
-2. Commands Implemented
+Features:
+	- Custom UI
+	- Colourful Aids
+	- Tab to complete
+	- Deal with accidental spaces and tabs
+	
+Commands Implemented
    File system related
    	- mkdir  
    	- cat  
@@ -12,7 +17,7 @@
    	- rmdir
    	- rm 
    	- pwd
-	- cp
+	   - cp
    	- mv
    	- touch
 
