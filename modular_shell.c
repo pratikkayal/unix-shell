@@ -5,6 +5,8 @@
 #include <unistd.h>     //rmdir, pwd
 #include <pwd.h>        //pwd
 #include <dirent.h>     //ls
+#include <readline/readline.h>
+
 
 #include "./Commands/cp.c"
 #include "./Commands/cat.c"
@@ -30,6 +32,10 @@
 #define BOLDGREEN   "\033[1m\033[32m"
 #define BOLDBLUE    "\033[1m\033[34m"  
 
+char* input;
+char* argval[10];
+int argcount = 0;
+int exitflag=0;
 
 void process_input_inplace(char *text) 
 {
@@ -50,17 +56,15 @@ void process_input_inplace(char *text)
 }
 
 
-char* input;
-char* argval[10];
-int argcount = 0;
-int exitflag=0;
-
 void getInput()
 {
     fflush(stdout); // clear all previous buffers if any
-    input = NULL;
+    // input = NULL;
     ssize_t buf = 0;
-    getline(&input,&buf,stdin);
+    // getline(&input,&buf,stdin);
+     input = readline("> ");
+    if (input) {
+
     argcount = 0;
     process_input_inplace(input);
     // printf("\nprocessed input:%s\n\n", input);
@@ -74,6 +78,7 @@ void getInput()
         else argcount++;
     }
     free(input);
+    }
 }
 
 /* about function*/
@@ -237,6 +242,15 @@ int main(int argc, char* argv[])
         	char* text = argval[1];
         	char* filename = argval[2];
         	grep_func(text, filename);
+        }
+        else if(strcmp(argval[0],"")==0)
+        {
+
+        }
+        else
+        {   
+            char *text = "Error: No Such Command Exists. Please type a valid command."; 
+            printf("%s\n", text);
         }
     }
 }
