@@ -25,7 +25,7 @@
 #include "./Commands/head.c"
 #include "./Commands/tail.c"
 #include "./Commands/cd.c"
-
+#include "./Commands/w.c"
 
 
 #define CYAN "\x1b[96m"
@@ -207,19 +207,31 @@ int main(int argc, char* argv[])
         {
             char* source;
             char* terminal;
-            source = argval[1];
-            terminal = argval[2];
-
-            cp_command(source, terminal);
+            if(argcount==3)
+            {
+                source = argval[1];
+                terminal = argval[2];
+                cp_command(source, terminal);
+            }
+            else
+            {
+                perror("Error in number of arguments");
+            }
         }
         else if(strcmp(argval[0],"mv")==0)
         {
             char* source;
             char* terminal;
-            source = argval[1];
-            terminal = argval[2];
-
-            mv_command(source, terminal);
+            if(argcount==3)
+            {
+                source = argval[1];
+                terminal = argval[2];
+                mv_command(source, terminal);
+            }
+            else
+            {
+                perror("Error in nummber of arguments");
+            }
         }
         else if(strcmp(argval[0],"touch")==0)
         {   
@@ -258,6 +270,37 @@ int main(int argc, char* argv[])
             }
             else{
                 sort_func(name);
+<<<<<<< HEAD
+=======
+            }
+        }
+        else if(strcmp(argval[0],"free")==0)
+        {
+             free_command();
+        }
+        else if(strcmp(argval[0],"ifconfig")==0)
+        {
+             ifconfig_command();
+        }
+        else if(strcmp(argval[0],"lscpu")==0)
+        {
+             lscpu_command();
+        }
+        else if(strcmp(argval[0],"ps")==0)
+        {
+
+            // printf("count %d\n", argcount);
+            // printf("%d\n",strlen(argval[1]));
+            if(argcount==1)
+                ps_command();
+            else if(argcount==2) 
+            {    
+                if(strlen(argval[1])==0)
+                    ps_command();
+                else
+                {
+                    ps_command_pid(argval[1]);
+>>>>>>> 90990fa856279b9b4775e06ebba4ded25bfa6b3f
                 }
             }
             else{
@@ -320,7 +363,7 @@ int main(int argc, char* argv[])
         // }
         else if(strcmp(argval[0],"w")==0)
         {
-            // w_func();
+            w_func();
         }
         else if(strcmp(argval[0],"testwc")==0)
         {
@@ -365,14 +408,23 @@ int main(int argc, char* argv[])
 
                 }
             }
+            else
+            {
+            	printf("Error in number of arguments\n");
+            }
         	
         	//grep_func(word, filename);
         }
         else if(strcmp(argval[0],"cat")==0)
         {
-            char* file;
-            file = argval[1];
-            cat_func(file);
+        	if(argcount==2)
+            {			char* file;
+                        file = argval[1];
+                        cat_func(file);}
+            else
+            {
+            	printf("Error in number of arguments\n");
+            }
         }
         else if(strcmp(argval[0],"ls")==0)
         {
@@ -404,32 +456,63 @@ int main(int argc, char* argv[])
 
                 }
             }
+            else
+            {
+            	printf("Error in number of arguments\n");
+            }
             
             
         }
         else if(strcmp(argval[0],"pwd")==0)
         {
-            char pwdpath[1000];
-            pwd_func(pwdpath,1);
+        	if(argcount==1)
+            {
+            	char pwdpath[1000];
+                pwd_func(pwdpath,1);
+            }
+            else
+            {
+            	printf("Error in number of arguments\n");
+
+            }
         }
         else if(strcmp(argval[0],"cd")==0)
         {
-            char* path = argval[1];
-            char pwdpath[1000];
-            cd_func(pwdpath,path);
+        	if(argcount==2)
+            {char* path = argval[1];
+                        char pwdpath[1000];
+                        cd_func(pwdpath,path);}
 
+            else
+            {
+            	printf("Error in number of arguments\n");
+
+            }
         }
         else if(strcmp(argval[0],"head")==0)
         {
-            char* numlines=argval[1];
-            char* filename=argval[2];
-            head_func(numlines,filename);
+        	if(argcount==3)
+            {char* numlines=argval[1];
+                        char* filename=argval[2];
+                        head_func(numlines,filename);}
+
+            else
+            {
+            	printf("Error in number of arguments\n");
+
+            }
         }
         else if(strcmp(argval[0],"tail")==0)
         {
-            char* numlines=argval[1];
-            char* filename=argval[2];
-            tail_func(numlines,filename);
+            if(argcount==3)
+            {char* numlines=argval[1];
+                        char* filename=argval[2];
+                        tail_func(numlines,filename);}
+            else
+            {
+            	printf("Error in number of arguments\n");
+
+            }
  
         }
         else if(strcmp(argval[0],"")==0)

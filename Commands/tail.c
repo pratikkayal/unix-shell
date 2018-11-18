@@ -21,7 +21,9 @@ void tail_func(char* numlines, char* filename)
             }
         }
         fclose(file);
+        printf("\n");
     }
+
     else
     {
       perror("No such file\n");
