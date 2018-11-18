@@ -93,14 +93,28 @@ void about()
 void mkdir_func(char* name)
 {
     int retCode = mkdir(name,0777);// 0777 for widest possible permissions given to mkdir
+
+    if(retCode==-1)
+    {
+        perror("+--- Error in mkdir ");
+    }
     
+}
+
+void gcc_func(int i){
+    if(i=0)
+        execlp("gcc","gcc",argval[1],argval[2],argval[3],(char *)NULL);
+
 }
 
 /* Remove a folder */
 void rmdir_func(char* name)
 {
     int retCode = rmdir(name);
-    
+    if(retCode==-1)
+    {
+        perror("+--- Error in rmdir ");
+    }
 }
 
 
@@ -182,12 +196,6 @@ int main(int argc, char* argv[])
 
             mv_command(source, terminal);
         }
-        // else if(strcmp(argval[0],"rm")==0)
-        // {
-        //     char* file;
-        //     file = argval[1];
-        //     rm_command(source, terminal);
-        // }
         else if(strcmp(argval[0],"touch")==0)
         {
             touch_func(argcount, argval);
@@ -236,6 +244,11 @@ int main(int argc, char* argv[])
         else if(strcmp(argval[0],"ps")==0)
         {
             ps_command();
+        }
+        else if(strcmp(argval[0],"gcc")==0)
+        {
+            int i=0;
+            gcc_func(i);
         }
         else if(strcmp(argval[0],"grep")==0)
         {
