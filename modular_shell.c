@@ -357,7 +357,7 @@ int main(int argc, char* argv[])
             }
             else
             {
-            	printf("Error in number of arguments");
+            	printf("Error in number of arguments\n");
             }
         	
         	//grep_func(word, filename);
