@@ -188,6 +188,7 @@ void ps_command_pid(char* var)
 	int count = 0;
 	while((val[count] = strsep(&pid, ",")) != NULL  && count < 19)    //strsep(char **stringp, const char *delim);
     {
+    	// printf("%s\n", val[count]);
  		count++;
     }
 
@@ -209,19 +210,21 @@ void ps_command_pid(char* var)
 	long uptime = get_uptime();
 
 
-	procdir = opendir("/proc");
-	if (procdir==NULL)
-	{
-		perror("Failed to open /proc directory");
-		exit(0);
-	}
-
 	// print header line
 	printf("username pid cpu_usage memory_usage vmsize vmrss state\tname\n");
 
 	for(int pid_c = 0; pid_c < count; pid_c++)
 	{
 		pid_temp = val[pid_c];
+		// printf("%s\n", pid_temp);
+		
+		procdir = opendir("/proc");
+		if (procdir==NULL)
+		{
+			perror("Failed to open /proc directory");
+			exit(0);
+		}
+
 		while((proc_file = readdir(procdir)) != NULL)
 		{
 			char *file_name = proc_file->d_name;

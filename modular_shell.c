@@ -214,7 +214,7 @@ int main(int argc, char* argv[])
             }
             else
             {
-                perror("Error in arguments");
+                perror("Error in number of arguments");
             }
         }
         else if(strcmp(argval[0],"mv")==0)
@@ -229,7 +229,7 @@ int main(int argc, char* argv[])
             }
             else
             {
-                perror("Error in arguments");
+                perror("Error in nummber of arguments");
             }
         }
         else if(strcmp(argval[0],"touch")==0)
