@@ -22,7 +22,10 @@
 #include "./Commands/lscpu.c"
 #include "./Commands/ps.c"
 #include "./Commands/grep.c"
-// #include "./Commands/w.c"
+#include "./Commands/head.c"
+#include "./Commands/tail.c"
+#include "./Commands/cd.c"
+
 
 
 #define CYAN "\x1b[96m"
@@ -31,6 +34,27 @@
 #define BOLDCYAN    "\033[1m\033[36m" 
 #define BOLDGREEN   "\033[1m\033[32m"
 #define BOLDBLUE    "\033[1m\033[34m"  
+
+
+//////////////Test Block////////////////////
+
+// #include "minunit.h"
+
+int wc = 0;
+int wc_test = 50;
+// int test_run =0;
+// static char * test_wc() 
+// {
+//     mu_assert("error, wc is not correct", wc == wc_test);
+//     return 0;
+// }
+
+// static char * all_tests() {
+// mu_run_test(test_wc);
+// return 0;
+// }
+
+////////////////////////////////////////////
 
 char* input;
 char* argval[10];
@@ -84,7 +108,7 @@ void getInput()
 /* about function*/
 void about()
 {
-    char* aboutStr = "\n  Made By:\n\n \t Pratik Kayal\n\t Pranjali Jain\n\t Naman Jain\n\t Soham Pachpandes\n";
+    char* aboutStr = "\n  Made By:\n\n \t Pratik Kayal\n\t Pranjali Jain\n\t Naman Jain\n\t Soham Pachpande\n";
 
     printf("%s",aboutStr);
 }
@@ -145,7 +169,8 @@ int main(int argc, char* argv[])
     {
         char temp[1000];
         char* path=getcwd(temp, sizeof(temp));
-        printf("%s>>", temp);
+        printf("%s%s",BOLDCYAN, temp);
+        printf("\033[0m");
         getInput();
 
         if(strcmp(argval[0],"about")==0)
@@ -174,7 +199,7 @@ int main(int argc, char* argv[])
         else if(strcmp(argval[0],"wc")==0)
         {
             char* foldername = argval[1];
-            wc_func(foldername);
+            wc = wc_func(foldername);
         }
 
         else if(strcmp(argval[0],"cp")==0)
@@ -220,23 +245,6 @@ int main(int argc, char* argv[])
                 sort_func(name);
             }
         }
-         else if(strcmp(argval[0],"cat")==0)
-        {
-            char* file;
-            file = argval[1];
-            cat_func(file);
-        }
-        else if(strcmp(argval[0],"ls")==0)
-        {
-            char* dirname;
-            dirname = argval[1];
-            ls_func(dirname);
-        }
-        else if(strcmp(argval[0],"pwd")==0)
-        {
-            char pwdpath[1000];
-            pwd_func(pwdpath,1);
-        }
         else if(strcmp(argval[0],"free")==0)
         {
              free_command();
@@ -252,7 +260,7 @@ int main(int argc, char* argv[])
         else if(strcmp(argval[0],"ps")==0)
         {
 
-             ps_command();
+            ps_command();
 
             // printf("count %d\n", argcount);
             // printf("%d\n",strlen(argval[1]));
@@ -290,15 +298,119 @@ int main(int argc, char* argv[])
             }
 
         }
-        else if(strcmp(argval[0],"grep")==0)
-        {
-        	char* text = argval[1];
-        	char* filename = argval[2];
-        	grep_func(text, filename);
-        }
         else if(strcmp(argval[0],"w")==0)
         {
             // w_func();
+        }
+        else if(strcmp(argval[0],"testwc")==0)
+        {
+            char* foldername = "./wc_test.txt";
+            wc = wc_func(foldername);
+            
+            if (wc == wc_test)
+            {
+                printf("Test Successful\n");
+            }
+            else
+            {
+                printf("Test Fail\n");
+            }
+
+            // char* test_results = all_tests();
+
+            // if (test_result != 0)
+            // {
+            //     printf("%s\n", test_result);
+            // }
+            // else
+            // {
+            //     printf("ALL TESTS PASSED\n");
+            // }
+        }
+        else if(strcmp(argval[0],"grep")==0)
+        {
+            char* word = argval[1];
+            char* filename = argval[2];
+            char* options=argval[3];
+            if(argcount==3)
+                grep_func(word, filename);
+            else if(argcount==4) 
+            {    
+                if(strlen(argval[3])==0)
+                    grep_func(word, filename);
+
+                else if(strcmp(options,"-n")==0)
+                {
+                    grep_func_linecount(word, filename,options);
+
+                }
+            }
+        	
+        	//grep_func(word, filename);
+        }
+        else if(strcmp(argval[0],"cat")==0)
+        {
+            char* file;
+            file = argval[1];
+            cat_func(file);
+        }
+        else if(strcmp(argval[0],"ls")==0)
+        {
+
+            char* dirname;
+            // dirname=argval[1];
+            // ls_func(dirname);
+
+
+            if(argcount==1)
+            {
+                dirname=(".");
+                ls_func_present(dirname);
+            }
+                
+            else if(argcount==2) 
+            {    
+                if(strlen(argval[1])==0)
+                {
+                    dirname=(".");
+                    ls_func_present(dirname);
+                }
+                    
+
+                else 
+                {
+                    dirname=argval[1];
+                    ls_func(dirname);
+
+                }
+            }
+            
+            
+        }
+        else if(strcmp(argval[0],"pwd")==0)
+        {
+            char pwdpath[1000];
+            pwd_func(pwdpath,1);
+        }
+        else if(strcmp(argval[0],"cd")==0)
+        {
+            char* path = argval[1];
+            char pwdpath[1000];
+            cd_func(pwdpath,path);
+
+        }
+        else if(strcmp(argval[0],"head")==0)
+        {
+            char* numlines=argval[1];
+            char* filename=argval[2];
+            head_func(numlines,filename);
+        }
+        else if(strcmp(argval[0],"tail")==0)
+        {
+            char* numlines=argval[1];
+            char* filename=argval[2];
+            tail_func(numlines,filename);
+ 
         }
         else if(strcmp(argval[0],"")==0)
         {

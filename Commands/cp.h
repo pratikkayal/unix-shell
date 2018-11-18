@@ -1,1 +1,0 @@
-void cp_command(char* source, char* target);

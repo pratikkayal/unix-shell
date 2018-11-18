@@ -17,7 +17,7 @@ void pwd_func(char* pwdpath,int printornot) // if printornot=1 --> print
     }
     else 
     {
-
+        perror("Error : getcwd() not working \n");
     }
 
 }
