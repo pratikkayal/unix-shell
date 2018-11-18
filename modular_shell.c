@@ -93,14 +93,28 @@ void about()
 void mkdir_func(char* name)
 {
     int retCode = mkdir(name,0777);// 0777 for widest possible permissions given to mkdir
+
+    if(retCode==-1)
+    {
+        perror("+--- Error in mkdir ");
+    }
     
+}
+
+void gcc_func(int i){
+    if(i=0)
+        execlp("gcc","gcc",argval[1],argval[2],argval[3],(char *)NULL);
+
 }
 
 /* Remove a folder */
 void rmdir_func(char* name)
 {
     int retCode = rmdir(name);
-    
+    if(retCode==-1)
+    {
+        perror("+--- Error in rmdir ");
+    }
 }
 
 
@@ -182,12 +196,6 @@ int main(int argc, char* argv[])
 
             mv_command(source, terminal);
         }
-        // else if(strcmp(argval[0],"rm")==0)
-        // {
-        //     char* file;
-        //     file = argval[1];
-        //     rm_command(source, terminal);
-        // }
         else if(strcmp(argval[0],"touch")==0)
         {
             touch_func(argcount, argval);
@@ -235,7 +243,33 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(argval[0],"ps")==0)
         {
+<<<<<<< HEAD
              ps_command();
+=======
+            // printf("count %d\n", argcount);
+            // printf("%d\n",strlen(argval[1]));
+            if(argcount==1)
+                ps_command();
+            else if(argcount==2) 
+            {    
+                if(strlen(argval[1])==0)
+                    ps_command();
+                else
+                {
+                    ps_command_pid(argval[1]);
+                }
+            }
+            else if(argcount==3)
+            {
+                if(strcmp(argval[1], "pid") == 0 || strcmp(argval[1], "p") == 0 || strcmp(argval[1], "-pid")==0 || strcmp(argval[1], "-p")==0)
+                    ps_command_pid(argval[2]);
+            }
+        }
+        else if(strcmp(argval[0],"gcc")==0)
+        {
+            int i=0;
+            gcc_func(i);
+>>>>>>> ba7276a39227ad0b59bbe1e8607e8291a4619d36
         }
         else if(strcmp(argval[0],"grep")==0)
         {
