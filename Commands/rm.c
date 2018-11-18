@@ -12,15 +12,10 @@ void rm_command(char* path)
 	// Delete the file at path
 	returnval = remove(path);
 
-	if( returnval == 0)
+	if( returnval != 0)
 	{
-		printf("File/Directory deleted successfully");
-	}
-	else
-	{
-		printf("Error: unable to delete");
-	}
-   
+		printf("Error: Unable to delete");
+	}  
 }
 
 

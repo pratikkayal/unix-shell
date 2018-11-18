@@ -10,6 +10,12 @@ void touch_func(int argc, char* argv[])
    while(i<argc){
 
     fp = fopen(argv[i],"w+");
+
+    if (fp == NULL)
+   {
+      perror("Error");
+      break;
+   }
     fclose(fp);
     i++;
 

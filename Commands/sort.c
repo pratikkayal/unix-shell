@@ -21,49 +21,53 @@ void sort_func(char* file_name)
  
    if (fp == NULL)
    {
-      perror("Error while opening the file.\n");
-      exit(EXIT_FAILURE);
+      perror("Error");
    }
-  
-   int i = 0;
-   while(fscanf(fp,"%[^\n]\n",line)!=EOF)
-   {
-   	
-   	int j=0;
-   	while(j<1000){
-   		arr[i][j]=line[j];
-   		j++;
-   	}
-   	i++;
-   	if (i==100){
-   	  perror("File is large.\n");
-      exit(EXIT_FAILURE);
-   	} 
+  else{
+             int i = 0;
+             while(fscanf(fp,"%[^\n]\n",line)!=EOF)
+             {
+             	
+             	int j=0;
+             	while(j<1000){
+             		arr[i][j]=line[j];
+             		j++;
+             	}
+             	i++;
+             	if (i==100){
+                 char *text = "Error: File is large";
+                 printf("%s\n", text); //"File is large.\n"
+                 break;
+               }  
+           }
+
+           if(i!=100){
+                          char* arr1[i];
+                        int u = 0;
+
+                         while(u < i){
+                            arr1[u] = arr[u];
+                            u++;
+                          }
+
+                         qsort (arr1, i, sizeof (char *), myCompare); 
+
+                         char* c;
+                         int k = 0;
+
+                         fclose(fp);
+
+                         k = 0;
+                         fp = fopen(file_name,"w+");
+                         while(k<i){
+                          fprintf(fp,"%s\n", arr1[k]);
+                          k++;
+                         }
+
+           }
+
+             fclose(fp);
  }
-
-  char* arr1[i];
-  int u = 0;
-
-   while(u < i){
-    	arr1[u] = arr[u];
-    	u++;
-    }
-
-   qsort (arr1, i, sizeof (char *), myCompare); 
-
-   char* c;
-   int k = 0;
-
-   fclose(fp);
-
-   k = 0;
-   fp = fopen(file_name,"w+");
-   while(k<i){
-   	fprintf(fp,"%s\n", arr1[k]);
-   	k++;
-   }
-   fclose(fp);
-
 }
 
 // int main(int argc, char* argv[])

@@ -22,7 +22,7 @@
 #include "./Commands/lscpu.c"
 #include "./Commands/ps.c"
 #include "./Commands/grep.c"
-
+// #include "./Commands/w.c"
 
 
 #define CYAN "\x1b[96m"
@@ -223,25 +223,29 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(argval[0],"free")==0)
         {
-            free_command();
+             free_command();
         }
         else if(strcmp(argval[0],"ifconfig")==0)
         {
-            ifconfig_command();
+             ifconfig_command();
         }
         else if(strcmp(argval[0],"lscpu")==0)
         {
-            lscpu_command();
+             lscpu_command();
         }
         else if(strcmp(argval[0],"ps")==0)
         {
-            ps_command();
+             ps_command();
         }
         else if(strcmp(argval[0],"grep")==0)
         {
         	char* text = argval[1];
         	char* filename = argval[2];
         	grep_func(text, filename);
+        }
+        else if(strcmp(argval[0],"w")==0)
+        {
+            // w_func();
         }
         else if(strcmp(argval[0],"")==0)
         {

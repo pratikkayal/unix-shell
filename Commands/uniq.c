@@ -14,70 +14,87 @@ void uniq_func(char* file_name)
  
    if (fp == NULL)
    {
-      perror("Error while opening the file.\n");
-      exit(EXIT_FAILURE);
+      perror("Error");
    }
   
-   int i = 0;
-   while(fscanf(fp,"%[^\n]\n",line)!=EOF)
-   {
-   	int j=0;
-   	while(j<1000){
-   		arr[i][j]=line[j];
-   		j++;
-   	}
+  else{
 
-   	i++;
-   	if (i==100){
-   	  perror("File is large.\n");
-      exit(EXIT_FAILURE);
-   	} 
- }
 
-  char* arr1[i];
-  char* arr2[i];
+                int i = 0;
+               while(fscanf(fp,"%[^\n]\n",line)!=EOF)
+               {
+                int j=0;
+                while(j<1000){
+                  arr[i][j]=line[j];
+                  j++;
+                }
 
-  int u = 0;
+                i++;
+                if (i==100){
+                 char *text = "Error: File is large";
+                 printf("%s\n", text); //"File is large.\n"
+                 break;
+               } 
+             }
 
-   while(u < i){
-    	arr1[u] = arr[u];
-    	u++;
-    }
 
-int y, r, p;
-int flg = 0;
+             if (i!=100){
+                           char* arr1[i];
+                          char* arr2[i];
 
-  while(y<i){
-    flg = 0;
-    r = 0;
-    while(r<p){
-      if (*arr1[y] == *arr2[r]){
-        flg = 1;
-      }
-      r++;
-    }
-    if (flg!=1){
-      arr2[p] = arr1[y];
-      p++;
-    }
-    y++;
+                          int u = 0;
+
+                           while(u < i){
+                              arr1[u] = arr[u];
+                              u++;
+                            }
+
+                        int y, r, p;
+                        int flg = 0;
+
+                        p = 0;
+                        y = 0;
+
+                          while(y<i){
+                            flg = 0;
+                            r = 0;
+
+                            while(r<p){
+                              if (*arr1[y] == *arr2[r]){
+                                flg = 1;
+                              }
+                              r++;
+                            }
+
+
+                            if (flg!=1){
+                              arr2[p] = arr1[y];
+                              p++;
+                            }
+                            y++;
+                          }
+                           // qsort (arr1, i, sizeof (char *), myCompare); 
+
+                           char* c;
+                           int k = 0;
+
+                           fclose(fp);
+
+                           k = 0;
+                           fp = fopen(file_name,"w+");
+
+                           while(k<p){
+                            fprintf(fp,"%s\n", arr2[k]);
+                            k++;
+                           }
+
+
+             }
+               fclose(fp);
+
+
   }
 
-   // qsort (arr1, i, sizeof (char *), myCompare); 
-
-   char* c;
-   int k = 0;
-
-   fclose(fp);
-
-   k = 0;
-   fp = fopen(file_name,"w+");
-
-   while(k<p){
-   	fprintf(fp,"%s\n", arr2[k]);
-   	k++;
-   }
-   fclose(fp);
 
 }
 

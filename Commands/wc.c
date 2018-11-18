@@ -14,34 +14,46 @@ void wc_func(char* file_name)
  
    if (fp == NULL)
    {
-      perror("Error while opening the file.\n");
-      exit(EXIT_FAILURE);
+      perror("Error");
    }
-  
-   int i = 0;
-   int char_count = 0;
-   int word_count = 0;
+   else{
 
-   while((fgets(line, 1000, fp)) != NULL)
-   {
-   	int j=0;
-    if (strncmp (&line[0]," ",1) != 0){ word_count++; }
+            int i = 0;
+            int char_count = 0;
+            int word_count = 0;
 
-   	while(j < strlen(line)){
-      if (strncmp (&line[j]," ",1) == 0){ word_count++; }
-   		char_count++;
-      j++;
-   	}
-   	i++;
-   	if (i==100){
-   	  perror("File is large.\n");
-      exit(EXIT_FAILURE);
-   	} 
- }
-   fclose(fp);
-   printf("%d   %d   %d   %s\n",i-1,word_count,char_count,file_name);
+            while((fgets(line, 1000, fp)) != NULL)
+            {
+               int j=0;
+             if (strncmp (&line[0]," ",1) != 0){ word_count++; }
 
-}
+               while(j < strlen(line)){
+               if (strncmp (&line[j]," ",1) == 0){ word_count++; }
+
+               char_count++;
+               j++;
+            }
+
+               i++;
+
+               if (i==100){
+                 char *text = "Error: File is large";
+                 printf("%s\n", text); //"File is large.\n"
+                 break;
+               } 
+          }
+            fclose(fp);
+            if (i!=100){
+
+               if (i == 0){
+                  printf("%d   %d   %d   %s\n",i,word_count,char_count,file_name);
+               }
+               else{
+                 printf("%d   %d   %d   %s\n",i-1,word_count,char_count,file_name);
+               }
+   }
+   
+}}
 
 // int main(int argc, char* argv[])
 // {
