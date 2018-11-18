@@ -17,10 +17,10 @@
 #include "./Commands/touch.c"
 #include "./Commands/uniq.c"
 #include "./Commands/wc.c"
-#include "./Commands/free.c"
-#include "./Commands/ifconfig.c"
-#include "./Commands/lscpu.c"
-#include "./Commands/ps.c"
+// #include "./Commands/free.c"
+// #include "./Commands/ifconfig.c"
+// #include "./Commands/lscpu.c"
+// #include "./Commands/ps.c"
 #include "./Commands/grep.c"
 #include "./Commands/head.c"
 #include "./Commands/tail.c"
@@ -86,7 +86,8 @@ void getInput()
     // input = NULL;
     ssize_t buf = 0;
     // getline(&input,&buf,stdin);
-     input = readline("> ");
+    input = readline("> ");
+
     if (input) {
 
     argcount = 0;
@@ -221,8 +222,15 @@ int main(int argc, char* argv[])
             mv_command(source, terminal);
         }
         else if(strcmp(argval[0],"touch")==0)
-        {
-            touch_func(argcount, argval);
+        {   
+
+            if (argcount == 1 || strcmp(argval[1],"")==0){
+                    char*name = "Error: Address Missing";
+                    printf("%s\n", name);
+                }
+                else{
+                   touch_func(argcount, argval);
+                }
         }
         else if(strcmp(argval[0],"uniq")==0)
         {
@@ -233,71 +241,83 @@ int main(int argc, char* argv[])
         else if(strcmp(argval[0],"sort")==0)
         {
             char* name;
-            name = argval[1];
+            if (argcount > 1){
+                 name = argval[1];
 
             if (strcmp(name,"-o")==0){
-                sort_func_o(argval[2], argval[3]);
+                if (argcount!=4 || strcmp(argval[3],"")==0){
+                    name = "Error: Address Missing";
+                    printf("%s\n", name);
+                }
+                else{
+                   sort_func_o(argval[2], argval[3]);
+                }
             }
             else if(strcmp(name,"-r")==0){
                 sort_func_r(argval[2]);
             }
             else{
                 sort_func(name);
-            }
-        }
-        else if(strcmp(argval[0],"free")==0)
-        {
-             free_command();
-        }
-        else if(strcmp(argval[0],"ifconfig")==0)
-        {
-             ifconfig_command();
-        }
-        else if(strcmp(argval[0],"lscpu")==0)
-        {
-             lscpu_command();
-        }
-        else if(strcmp(argval[0],"ps")==0)
-        {
-
-            ps_command();
-
-            // printf("count %d\n", argcount);
-            // printf("%d\n",strlen(argval[1]));
-            if(argcount==1)
-                ps_command();
-            else if(argcount==2) 
-            {    
-                if(strlen(argval[1])==0)
-                    ps_command();
-                else
-                {
-                    ps_command_pid(argval[1]);
                 }
             }
-            else if(argcount==3)
-            {
-                if(strcmp(argval[1], "pid") == 0 || strcmp(argval[1], "p") == 0 || strcmp(argval[1], "-pid")==0 || strcmp(argval[1], "-p")==0)
-                    ps_command_pid(argval[2]);
+            else{
+                name="Error: Bad Address";
+                printf("%s\n", name);
             }
         }
-        else if(strcmp(argval[0],"gcc")==0)
-        {
-            int i=0;
-            gcc_func(i);
+        // else if(strcmp(argval[0],"free")==0)
+        // {
+        //      free_command();
+        // }
+        // else if(strcmp(argval[0],"ifconfig")==0)
+        // {
+        //      ifconfig_command();
+        // }
+        // else if(strcmp(argval[0],"lscpu")==0)
+        // {
+        //      lscpu_command();
+        // }
+        // else if(strcmp(argval[0],"ps")==0)
+        // {
 
-            if(strcmp(argval[2],"-o")!=0) {
-                i=1;
-                perror("Error in format \n Correct format: gcc filename1 -o filename2 for");}
-            else if(argval[3]==NULL || strcmp(argval[2]," ")==0) {
-                i=1;
-                perror("Error in format \n Correct format: gcc filename1 -o filename2 for");}
-            else {
-                printf("gcc Done!\n");
-                gcc_func(i);
-            }
+        //     ps_command();
 
-        }
+        //     // printf("count %d\n", argcount);
+        //     // printf("%d\n",strlen(argval[1]));
+        //     if(argcount==1)
+        //         ps_command();
+        //     else if(argcount==2) 
+        //     {    
+        //         if(strlen(argval[1])==0)
+        //             ps_command();
+        //         else
+        //         {
+        //             ps_command_pid(argval[1]);
+        //         }
+        //     }
+        //     else if(argcount==3)
+        //     {
+        //         if(strcmp(argval[1], "pid") == 0 || strcmp(argval[1], "p") == 0 || strcmp(argval[1], "-pid")==0 || strcmp(argval[1], "-p")==0)
+        //             ps_command_pid(argval[2]);
+        //     }
+        // }
+        // else if(strcmp(argval[0],"gcc")==0)
+        // {
+        //     int i=0;
+        //     gcc_func(i);
+
+        //     if(strcmp(argval[2],"-o")!=0) {
+        //         i=1;
+        //         perror("Error in format \n Correct format: gcc filename1 -o filename2 for");}
+        //     else if(argval[3]==NULL || strcmp(argval[2]," ")==0) {
+        //         i=1;
+        //         perror("Error in format \n Correct format: gcc filename1 -o filename2 for");}
+        //     else {
+        //         printf("gcc Done!\n");
+        //         gcc_func(i);
+        //     }
+
+        // }
         else if(strcmp(argval[0],"w")==0)
         {
             // w_func();

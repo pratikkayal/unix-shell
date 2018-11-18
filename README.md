@@ -5,8 +5,8 @@
 Features:
 	- Custom UI
 	- Colourful Aids
-	- Tab to complete
-	- Deal with accidental spaces and tabs
+	- Tab completetion
+	- Deals with accidental spaces and tabs
 	
 Commands Implemented
    File system related
@@ -23,7 +23,7 @@ Commands Implemented
 
    File Operations
    	- wc
-   	- sort 
+   	- sort (-o, -r)
    	- uniq 
    	
    System Information
@@ -31,7 +31,7 @@ Commands Implemented
    	- lscpu
    	- free
    	- w
-   	- ps
+   	- ps (-p, -pid)
 
    Shell UI related
    	- exit
@@ -42,6 +42,6 @@ Commands Implemented
    	- gcc
    
 ---
-# To run:
+# To Run:
 1. Compile shell.c and modular_shell.c files
 2. run ./shell

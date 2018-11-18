@@ -8,19 +8,19 @@ void touch_func(int argc, char* argv[])
    int i = 1;
 
    while(i<argc){
+    if (strcmp(argv[i],"")!=0){
+          fp = fopen(argv[i],"w+"); 
 
-    fp = fopen(argv[i],"w+"); 
-
-    if (fp == NULL)
-   {
-      perror("Error");
-      break;
+          if (fp == NULL)
+         {
+            perror("Error");
+            break;
+         }
+          fclose(fp);
+          
    }
-    fclose(fp);
-    i++;
-
-   }
-}
+   i++;
+}}
 
 // int main(int argc, char* argv[])
 // {
