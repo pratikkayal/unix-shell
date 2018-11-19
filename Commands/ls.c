@@ -107,11 +107,10 @@ void ls_func(char* dirname)
     }
     else
     {
-<<<<<<< HEAD
         perror("Error");
-=======
+
         perror("Error ");
->>>>>>> a0b46b972510962735c90ca4d4f6b82a497c33da
+
     }
     cd_func_for_ls(pwdpath,pathofpresent);
 
@@ -171,11 +170,9 @@ void ls_func_present(char* dirname)
     }
     else
     {
-<<<<<<< HEAD
+
         perror("Error");
-=======
         perror("Error ");
->>>>>>> a0b46b972510962735c90ca4d4f6b82a497c33da
     }
 
 }
