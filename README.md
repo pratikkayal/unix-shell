@@ -38,13 +38,13 @@
 - Executable:
 	- gcc
 
----
+
 ## To Run:
 ```
 Compile shell.c and modular_shell.c files
 run ./shell or run make
 ```
----
+
 ## Contributions:
 - Soham Pachpande
 - Pranjali Jain
