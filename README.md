@@ -39,8 +39,14 @@
 	- gcc
 
 ---
-# To Run:
+## To Run:
 ```
 Compile shell.c and modular_shell.c files
 run ./shell or run make
 ```
+---
+## Contributions:
+- Naman Jain
+- Pranjali Jain
+- Pratik Kayal
+- Soham Pachpande
