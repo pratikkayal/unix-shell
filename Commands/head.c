@@ -26,14 +26,14 @@ void head_func(char* numlines, char* filename)
       printf("\n");
       if(count==0)
       {
-          perror("File is empty\n");
+          perror("Error");
       }
 
       fclose(file);
   }
   else
   {
-    perror("No such file\n");
+    perror("Error");
   }
 }
 

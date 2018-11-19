@@ -26,7 +26,7 @@ void tail_func(char* numlines, char* filename)
 
     else
     {
-      perror("No such file\n");
+      perror("Error");
       exit(0);
     }
 
@@ -48,14 +48,14 @@ void tail_func(char* numlines, char* filename)
 
         if(count ==0)
         {
-            perror("File is empty\n");
+            perror("Error");
         }
         fclose(file);
         
     }
     else
     {
-      perror("No such file\n");
+      perror("Error");
     }
 }
 

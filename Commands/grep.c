@@ -46,13 +46,13 @@ void grep_func(char* word, char* filename)
     
         if(flag==0)
         {
-            perror("Warning : word not present in file\n");
+            perror("Error");
         }
         fclose(file);
     }
     else
     {
-        perror("No such file \n");
+        perror("Error");
     }
 }
 
@@ -101,13 +101,13 @@ void grep_func_linecount(char* word, char* filename, char* options)
     
         if(flag==0)
         {
-            perror("Warning : word not present in file\n");
+            perror("Error");
         }
         fclose(file);
     }
     else
     {
-        perror("No such file \n");
+        perror("Error");
     }
 }
 
