@@ -13,6 +13,7 @@
 	- ls
 	- cd
 	- rm 
+	- rmdir
 	- pwd
 	- cp
 	- mv
