@@ -107,7 +107,7 @@ void ls_func(char* dirname)
     }
     else
     {
-        perror("Empty directory\n");
+        perror("Error ");
     }
     cd_func_for_ls(pwdpath,pathofpresent);
 
@@ -167,7 +167,7 @@ void ls_func_present(char* dirname)
     }
     else
     {
-        perror("Empty directory\n");
+        perror("Error ");
     }
 
 }
