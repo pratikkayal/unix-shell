@@ -17,16 +17,16 @@
 #include "./Commands/touch.c"
 #include "./Commands/uniq.c"
 #include "./Commands/wc.c"
-// #include "./Commands/free.c"
-// #include "./Commands/ifconfig.c"
-// #include "./Commands/lscpu.c"
-// #include "./Commands/ps.c"
+#include "./Commands/free.c"
+#include "./Commands/ifconfig.c"
+#include "./Commands/lscpu.c"
+#include "./Commands/ps.c"
 #include "./Commands/grep.c"
 #include "./Commands/head.c"
 #include "./Commands/tail.c"
 #include "./Commands/cd.c"
-// #include "./Commands/w.c"
-
+#include "./Commands/rmdir.c"
+#include "./Commands/w.c"
 
 #define CYAN "\x1b[96m"
 #define GREEN "\x1b[92m"
@@ -187,12 +187,12 @@ int main(int argc, char* argv[])
         {
             exitflag=1;
         }
-        else if(strcmp(argval[0],"rmdir")==0)
-        {
+        // else if(strcmp(argval[0],"rmdir")==0)
+        // {
 
-            char* foldername = argval[1];
-            rmdir_func(foldername);
-        }
+        //     char* foldername = argval[1];
+        //     rmdir_func(foldername);
+        // }
         else if(strcmp(argval[0],"clear")==0)
         {
             clear();
@@ -313,39 +313,39 @@ int main(int argc, char* argv[])
 //         }
 
 
-        // else if(strcmp(argval[0],"free")==0)
-        // {
-        //      free_command();
-        // }
-        // else if(strcmp(argval[0],"ifconfig")==0)
-        // {
-        //      ifconfig_command();
-        // }
-        // else if(strcmp(argval[0],"lscpu")==0)
-        // {
-        //      lscpu_command();
-        // }
-        // else if(strcmp(argval[0],"ps")==0)
-        // {
-        //     // printf("count %d\n", argcount);
-        //     // printf("%d\n",strlen(argval[1]));
-        //     if(argcount==1)
-        //         ps_command();
-        //     else if(argcount==2) 
-        //     {    
-        //         if(strlen(argval[1])==0)
-        //             ps_command();
-        //         else
-        //         {
-        //             ps_command_pid(argval[1]);
-        //         }
-        //     }
-        //     else if(argcount==3)
-        //     {
-        //         if(strcmp(argval[1], "pid") == 0 || strcmp(argval[1], "p") == 0 || strcmp(argval[1], "-pid")==0 || strcmp(argval[1], "-p")==0)
-        //             ps_command_pid(argval[2]);
-        //     }
-        // }
+        else if(strcmp(argval[0],"free")==0)
+        {
+             free_command();
+        }
+        else if(strcmp(argval[0],"ifconfig")==0)
+        {
+             ifconfig_command();
+        }
+        else if(strcmp(argval[0],"lscpu")==0)
+        {
+             lscpu_command();
+        }
+        else if(strcmp(argval[0],"ps")==0)
+        {
+            // printf("count %d\n", argcount);
+            // printf("%d\n",strlen(argval[1]));
+            if(argcount==1)
+                ps_command();
+            else if(argcount==2) 
+            {    
+                if(strlen(argval[1])==0)
+                    ps_command();
+                else
+                {
+                    ps_command_pid(argval[1]);
+                }
+            }
+            else if(argcount==3)
+            {
+                if(strcmp(argval[1], "pid") == 0 || strcmp(argval[1], "p") == 0 || strcmp(argval[1], "-pid")==0 || strcmp(argval[1], "-p")==0)
+                    ps_command_pid(argval[2]);
+            }
+        }
         else if(strcmp(argval[0],"gcc")==0)
         {
             int i=0;
@@ -522,6 +522,30 @@ int main(int argc, char* argv[])
 
             }
  
+        }
+        else if(strcmp(argval[0],"rmdir")==0)
+        {   
+
+            if (argcount == 1 || strcmp(argval[1],"")==0){
+                char*name = "Error: Address Missing";
+                printf("%s\n", name);
+            }
+            else
+            {
+                char* file = argval[1];
+                char nfile[10000];
+
+                strcpy(nfile, argval[1]);
+                DIR *dr = opendir(nfile);
+                if (dr == NULL)  // opendir returns NULL if couldn't open directory 
+                { 
+                    perror("Error");
+                }
+                else{
+                    closedir(dr);
+                    rm_dir(nfile);
+                } 
+            }
         }
         else if(strcmp(argval[0],"")==0)
         {
