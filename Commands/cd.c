@@ -34,7 +34,7 @@ void cd_func(char* pwdpath,char* path)
     }
     else 
     {
-        perror("Error : incorrect path \n");
+        perror("Error");
     }
     
 }

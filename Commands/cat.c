@@ -18,12 +18,12 @@ void cat_func(char* filename)
     	fclose(file);
     	if(count==0)
     	{
-    		perror("File is empty\n");
+    		perror("Error");
     	}
 	}
 	else
 	{
-		perror("No such file \n");
+		perror("Error");
 	}
 }
 

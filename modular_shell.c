@@ -17,15 +17,15 @@
 #include "./Commands/touch.c"
 #include "./Commands/uniq.c"
 #include "./Commands/wc.c"
-#include "./Commands/free.c"
-#include "./Commands/ifconfig.c"
-#include "./Commands/lscpu.c"
-#include "./Commands/ps.c"
+// #include "./Commands/free.c"
+// #include "./Commands/ifconfig.c"
+// #include "./Commands/lscpu.c"
+// #include "./Commands/ps.c"
 #include "./Commands/grep.c"
 #include "./Commands/head.c"
 #include "./Commands/tail.c"
 #include "./Commands/cd.c"
-#include "./Commands/w.c"
+// #include "./Commands/w.c"
 
 
 #define CYAN "\x1b[96m"
@@ -311,39 +311,41 @@ int main(int argc, char* argv[])
 //                 printf("%s\n", name);
 //             }
 //         }
-        else if(strcmp(argval[0],"free")==0)
-        {
-             free_command();
-        }
-        else if(strcmp(argval[0],"ifconfig")==0)
-        {
-             ifconfig_command();
-        }
-        else if(strcmp(argval[0],"lscpu")==0)
-        {
-             lscpu_command();
-        }
-        else if(strcmp(argval[0],"ps")==0)
-        {
-            // printf("count %d\n", argcount);
-            // printf("%d\n",strlen(argval[1]));
-            if(argcount==1)
-                ps_command();
-            else if(argcount==2) 
-            {    
-                if(strlen(argval[1])==0)
-                    ps_command();
-                else
-                {
-                    ps_command_pid(argval[1]);
-                }
-            }
-            else if(argcount==3)
-            {
-                if(strcmp(argval[1], "pid") == 0 || strcmp(argval[1], "p") == 0 || strcmp(argval[1], "-pid")==0 || strcmp(argval[1], "-p")==0)
-                    ps_command_pid(argval[2]);
-            }
-        }
+
+
+        // else if(strcmp(argval[0],"free")==0)
+        // {
+        //      free_command();
+        // }
+        // else if(strcmp(argval[0],"ifconfig")==0)
+        // {
+        //      ifconfig_command();
+        // }
+        // else if(strcmp(argval[0],"lscpu")==0)
+        // {
+        //      lscpu_command();
+        // }
+        // else if(strcmp(argval[0],"ps")==0)
+        // {
+        //     // printf("count %d\n", argcount);
+        //     // printf("%d\n",strlen(argval[1]));
+        //     if(argcount==1)
+        //         ps_command();
+        //     else if(argcount==2) 
+        //     {    
+        //         if(strlen(argval[1])==0)
+        //             ps_command();
+        //         else
+        //         {
+        //             ps_command_pid(argval[1]);
+        //         }
+        //     }
+        //     else if(argcount==3)
+        //     {
+        //         if(strcmp(argval[1], "pid") == 0 || strcmp(argval[1], "p") == 0 || strcmp(argval[1], "-pid")==0 || strcmp(argval[1], "-p")==0)
+        //             ps_command_pid(argval[2]);
+        //     }
+        // }
         else if(strcmp(argval[0],"gcc")==0)
         {
             int i=0;
@@ -363,7 +365,7 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(argval[0],"w")==0)
         {
-             w_func();
+             // w_func();
         }
         else if(strcmp(argval[0],"testwc")==0)
         {
@@ -416,14 +418,16 @@ int main(int argc, char* argv[])
         	//grep_func(word, filename);
         }
         else if(strcmp(argval[0],"cat")==0)
-        {
-        	if(argcount==2)
-            {			char* file;
-                        file = argval[1];
-                        cat_func(file);}
+        {   
+            if (argcount == 1 || strcmp(argval[1],"")==0){
+                    char*name = "Error: Address Missing";
+                    printf("%s\n", name);
+                }
             else
             {
-            	printf("Error in number of arguments\n");
+            	char* file;
+                file = argval[1];
+                cat_func(file);
             }
         }
         else if(strcmp(argval[0],"ls")==0)
@@ -465,7 +469,7 @@ int main(int argc, char* argv[])
         }
         else if(strcmp(argval[0],"pwd")==0)
         {
-        	if(argcount==1)
+        	if(argcount == 1 || strcmp(argval[2],"")==0)
             {
             	char pwdpath[1000];
                 pwd_func(pwdpath,1);
@@ -477,16 +481,20 @@ int main(int argc, char* argv[])
             }
         }
         else if(strcmp(argval[0],"cd")==0)
-        {
-        	if(argcount==2)
-            {char* path = argval[1];
-                        char pwdpath[1000];
-                        cd_func(pwdpath,path);}
+        {   
+            if (argcount == 1 || strcmp(argval[1],"")==0){
+                
+                struct passwd *pw = getpwuid(getuid());
+                char *path = pw->pw_dir;
 
+                char pwdpath[1000];
+                cd_func(pwdpath,path);
+                }
             else
             {
-            	printf("Error in number of arguments\n");
-
+                char* path = argval[1];
+                char pwdpath[1000];
+                cd_func(pwdpath,path);
             }
         }
         else if(strcmp(argval[0],"head")==0)
