@@ -12,7 +12,6 @@
 	- cat  
 	- ls
 	- cd
-	- rmdir
 	- rm 
 	- pwd
 	- cp
