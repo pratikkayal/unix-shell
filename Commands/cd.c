@@ -38,6 +38,20 @@ void cd_func(char* pwdpath,char* path)
     }
     
 }
+void cd_func_for_ls(char* pwdpath,char* path)
+{
+    int value = chdir(path);
+    //printf("cd done\n");
+    if(value==0) 
+    {
+        pwd_func(pwdpath,0);
+    }
+    else 
+    {
+        //perror("Error : incorrect path \n");
+    }
+    
+}
 
 
 // void main(int argc, char* argv[])
