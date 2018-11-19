@@ -2,45 +2,45 @@
 
 # Features:
 ---
-Features:
-	- Custom UI
-	- Colourful Aids
-	- Tab completetion
-	- Deals with accidental spaces and tabs
+Features:<br/>
+- Custom UI
+- Colourful Aids
+- Tab completetion
+- Deals with accidental spaces and tabs
 	
 Commands Implemented
    File system related
-   	- mkdir  
-   	- cat  
-   	- ls
-   	- cd
-   	- rmdir
-   	- rm 
-   	- pwd
-	   - cp
-   	- mv
-   	- touch
+- mkdir  
+- cat  
+- ls
+- cd
+- rmdir
+- rm 
+- pwd
+- cp
+- mv
+- touch
 
-   File Operations
-   	- wc
-   	- sort (-o, -r)
-   	- uniq 
-   	
-   System Information
-   	- ifconfig
-   	- lscpu
-   	- free
-   	- w
-   	- ps (-p, -pid)
+File Operations
+- wc
+- sort (-o, -r)
+- uniq 
 
-   Shell UI related
-   	- exit
-   	- clear
-   	- about
+System Information
+- ifconfig
+- lscpu
+- free
+- w
+- ps (-p, -pid)
 
-   Executable
-   	- gcc
-   
+Shell UI related
+- exit
+- clear
+- about
+
+Executable
+- gcc
+
 ---
 # To Run:
 1. Compile shell.c and modular_shell.c files
