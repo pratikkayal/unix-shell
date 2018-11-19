@@ -85,7 +85,7 @@ void ls_func(char* dirname)
     }
     else
     {
-        perror("Empty directory\n");
+        perror("Error");
     }
 
 }
@@ -143,7 +143,7 @@ void ls_func_present(char* dirname)
     }
     else
     {
-        perror("Empty directory\n");
+        perror("Error");
     }
 
 }
