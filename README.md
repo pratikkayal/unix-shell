@@ -46,7 +46,7 @@ run ./shell or run make
 ```
 ---
 ## Contributions:
-- Naman Jain
-- Pranjali Jain
-- Pratik Kayal
 - Soham Pachpande
+- Pranjali Jain
+- Naman Jain
+- Pratik Kayal
