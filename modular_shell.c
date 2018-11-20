@@ -128,6 +128,7 @@ void mkdir_func(char* name)
 
 void gcc_func(int i){
     if(i==0)
+        printf("C program successfully compiled!\n");
         execlp("gcc","gcc",argval[1],argval[2],argval[3],(char *)NULL);
 
 }
@@ -349,8 +350,10 @@ int main(int argc, char* argv[])
         else if(strcmp(argval[0],"gcc")==0)
         {
             int i=0;
-            gcc_func(i);
-
+            // gcc_func(i);
+            if(argcount<3) 
+                perror("Error in format \n Correct format: gcc filename1 -o filename2 for");
+            else
             if(strcmp(argval[2],"-o")!=0) {
                 i=1;
                 perror("Error in format \n Correct format: gcc filename1 -o filename2 for");}
