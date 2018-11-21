@@ -5,11 +5,11 @@
 void rm_dir(char direc[10000]) 
 { 
     
-    struct dirent *de;  // Pointer for directory entry 
+    struct dirent *de;  
     DIR *dr = opendir(direc); 
 
 
-    if (dr == NULL)  // opendir returns NULL if couldn't open directory 
+    if (dr == NULL)  
     { 
          int rm = remove(direc);
     } 
@@ -37,12 +37,3 @@ void rm_dir(char direc[10000])
         closedir(dr);     
    }
 } 
-
-// int main(int argc, char const *argv[])
-// {
-//     char file[10000];
-//     strcat(file, "test");
-
-//     rm_dir(file);
-//     return 0;
-// }
